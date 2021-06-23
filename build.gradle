@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+application {
+    mainClass = 'de.gitlab.kaisoenmalex.LaunchApplication'
+}
+
+
+group 'de.gitlab.kaisoenmalex'
+version '1.0-ALPHA'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'de.gitlab.kaisoenmalex.LaunchApplication'
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+javafx {
+    version = "15.0.1"
+    modules = [ 'javafx.controls', 'javafx.fxml']
+}
+
+test {
+    useJUnitPlatform()
+}
