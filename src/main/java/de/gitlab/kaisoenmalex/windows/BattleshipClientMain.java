@@ -2,6 +2,7 @@ package de.gitlab.kaisoenmalex.windows;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import okhttp3.OkHttpClient;
 
 /**
  * @author Alexander Ley
