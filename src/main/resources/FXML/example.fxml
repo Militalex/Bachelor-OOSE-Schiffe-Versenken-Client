@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.gitlab.kaisoenmalex.windows.ExampleController">
+    <Label alignment="TOP_LEFT" layoutX="245.0" layoutY="187.0" text="Hallo Welt">
+        <font>
+          <Font name="Arial" size="24.0" />
+        </font>
+    </Label>
+</AnchorPane>
