@@ -32,9 +32,17 @@ public abstract class Tickable {
     }
 
     /**
-     * Stops the Timer
+     * Stops the Timer and makes the timer ready for next start.
      */
     public void stop() {
         timer.cancel();
+
+        timer = new Timer();
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                tick();
+            }
+        };
     }
 }
