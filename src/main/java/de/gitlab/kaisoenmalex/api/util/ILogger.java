@@ -3,7 +3,7 @@ package de.gitlab.kaisoenmalex.api.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 /**
  * @author Alexander Ley
@@ -11,7 +11,12 @@ import javax.swing.*;
  *
  * This interface give classes the functionality to use a logger.
  */
-public interface ILogger {
+public interface ILogger{
+
+    /**
+     * Offers a Logger for static classes.
+     */
+    Logger STATIC_LOGGER = LoggerFactory.getLogger("Static Logger");
 
     default Logger getLogger(){
         return LoggerFactory.getLogger(this.getClass());
