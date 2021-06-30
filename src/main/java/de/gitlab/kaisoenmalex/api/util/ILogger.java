@@ -25,7 +25,7 @@ public interface ILogger{
     /**
      * Shows a Error window with String msg.
      */
-    default void showError(String msg){
+    static void showError(String msg){
         JOptionPane.showMessageDialog(null, msg, "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
