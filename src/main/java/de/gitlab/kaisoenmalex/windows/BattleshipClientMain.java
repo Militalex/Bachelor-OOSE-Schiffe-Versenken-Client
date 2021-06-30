@@ -17,6 +17,8 @@ import java.io.IOException;
  */
 public class BattleshipClientMain extends Application {
 
+    public static Application application;
+
     /**
      * A Reference to activeController Object.
      */
@@ -26,6 +28,7 @@ public class BattleshipClientMain extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         BattleshipClientMain.stage = stage;
+        application =this;
         changeScene("/FXML/example.fxml", "Schiffe Versenken", 400, 400);
         stage.show();
     }
