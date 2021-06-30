@@ -1,6 +1,7 @@
 package de.gitlab.kaisoenmalex.windows;
 
 import de.gitlab.kaisoenmalex.api.IController;
+import de.gitlab.kaisoenmalex.api.util.ILogger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,11 +12,12 @@ import java.io.IOException;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.1
+ * latest author: Kai Sturm
  *
  * This Class is the entry Point into the Application.
  */
-public class BattleshipClientMain extends Application {
+public class BattleshipClientMain extends Application implements ILogger {
 
     public static Application application;
 
@@ -23,13 +25,13 @@ public class BattleshipClientMain extends Application {
      * A Reference to activeController Object.
      */
     public static IController<?> activeController;
-    private static Stage stage;
+    static Stage stage;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage){
         BattleshipClientMain.stage = stage;
-        application =this;
-        changeScene("/FXML/example.fxml", "Schiffe Versenken", 400, 400);
+        application = this;
+        changeScene("/FXML/menu.fxml", "Schiffe Versenken", 600, 400, false);
         stage.show();
     }
 
@@ -38,23 +40,32 @@ public class BattleshipClientMain extends Application {
     }
 
     /**
-     * This Method changes the scene.
+     * This Method changes the scene. If next scene can't load the application will be closed.
      * @param fxmlFile .fxml file for loading (e.g. "/FXML/example.fxml").
      * @param title Title of the window.
      * @param width Width of the window.
      * @param height Height of the window.
-     * @throws IOException if path to .fxml file is not valid.
+     * @param ignoreException if the exception has to be ignored.
      */
-    public static void changeScene(String fxmlFile, String title, int width, int height) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(BattleshipClientMain.class.getResource(fxmlFile));
+    public static void changeScene(String fxmlFile, String title, int width, int height, boolean ignoreException) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(BattleshipClientMain.class.getResource(fxmlFile));
 
-        Parent root = fxmlLoader.load();
+            Parent root = fxmlLoader.load();
 
-        activeController = fxmlLoader.getController();
+            activeController = fxmlLoader.getController();
 
-        Scene scene = new Scene(root, width, height);
+            Scene scene = new Scene(root, width, height);
 
-        stage.setTitle(title);
-        stage.setScene(scene);
+            stage.setTitle(title);
+            stage.setScene(scene);
+        }
+        catch (Exception ex) {
+            if (!ignoreException) {
+                STATIC_LOGGER.error("Can't found: " + fxmlFile, ex);
+                ILogger.showError("Die n\u00e4chste Szene konnte nicht geladen werden.");
+                BattleshipClientMain.stage.close();
+            }
+        }
     }
 }
