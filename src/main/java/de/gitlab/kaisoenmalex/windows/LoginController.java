@@ -1,12 +1,16 @@
 package de.gitlab.kaisoenmalex.windows;
 
 import de.gitlab.kaisoenmalex.api.IController;
+import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
@@ -36,9 +40,9 @@ public class LoginController implements IController<LoginController>, Initializa
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Prefetch
-        cmb_session.getSelectionModel().select(0);
-        cmb_session.setItems(FXCollections.observableArrayList("New Session", "Join Session"));
+
+        //Define Combobox
+        cmb_session.setItems(FXCollections.observableArrayList("Neues Spiel", "Spiel beitreten"));
 
         check_random.setVisible(false);
         btn_confirm.setDisable(false);
@@ -51,7 +55,30 @@ public class LoginController implements IController<LoginController>, Initializa
 
         //Listener
         cmb_session.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) ->
-            check_random.setVisible(newValue.intValue() == 0)
+                check_random.setVisible(newValue.intValue() == 0)
         );
+
+        cmb_session.getSelectionModel().select(0);
+
+
     }
+
+    /**
+     * Send ConnectPacket to Server
+     */
+
+    public void pack(ActionEvent event) throws IOException {
+
+        boolean isHost = cmb_session.getSelectionModel().getSelectedIndex() == 0;
+        boolean isNoobVariant = !(check_pro.isSelected());
+        boolean isRandomEnemey = check_random.isSelected();
+        String code = txt_code.getText();
+        if (isHost == true) { code = null; }
+
+
+        ConnectPacket connectPacket = new ConnectPacket(txt_name.getText(), isHost, isNoobVariant, isRandomEnemey, code, null);
+
+    }
+
+
 }
