@@ -5,45 +5,92 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.gitlab.kaisoenmalex.windows.LoginController">
-   <children>
-      <HBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <TextField fx:id="txt_name" alignment="CENTER" text="Gib deinen Namen ein">
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <ComboBox fx:id="cmb_session" prefWidth="150.0" promptText="Select Session" visibleRowCount="2">
-                     <VBox.margin>
-                        <Insets bottom="25.0" />
-                     </VBox.margin>
-                  </ComboBox>
-                  <CheckBox fx:id="check_random" mnemonicParsing="false" prefWidth="150.0" text="Zufällig">
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin></CheckBox>
-                  <TextField fx:id="txt_code" alignment="CENTER" text="Gib den Code ein">
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label fx:id="lbl_level" prefHeight="40.0" text="Wähle Schwierigkeitsgrad" />
-                  <CheckBox fx:id="check_pro" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pro">
-                     <VBox.margin>
-                        <Insets bottom="35.0" />
-                     </VBox.margin></CheckBox>
-                  <Button fx:id="btn_confirm" mnemonicParsing="false" onAction="#pack" prefHeight="50.0" prefWidth="150.0" text="Bestätigen" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="de.gitlab.kaisoenmalex.windows.LoginController">
+   <HBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
+         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="215.0">
+         <Label text="Schiffe Versenken">
+            <font>
+               <Font name="Arial Bold" size="24.0"/>
+            </font>
+            <VBox.margin>
+               <Insets bottom="20.0"/>
+            </VBox.margin>
+         </Label>
+         <Separator prefWidth="200.0">
+            <VBox.margin>
+               <Insets bottom="10.0"/>
+            </VBox.margin>
+         </Separator>
+         <TextField fx:id="txt_name" alignment="CENTER" promptText="Namen eingeben">
+            <VBox.margin>
+               <Insets bottom="10.0"/>
+            </VBox.margin>
+            <font>
+               <Font size="14.0"/>
+            </font>
+         </TextField>
+         <ComboBox fx:id="cmb_session" promptText="Select Session" visibleRowCount="2">
+            <VBox.margin>
+               <Insets bottom="10.0"/>
+            </VBox.margin>
+         </ComboBox>
+         <CheckBox fx:id="check_random" mnemonicParsing="false" prefWidth="100.0" text="Zufällig">
+            <VBox.margin>
+               <Insets bottom="20.0"/>
+            </VBox.margin>
+            <font>
+               <Font name="Arial" size="14.0"/>
+            </font>
+         </CheckBox>
+         <Separator prefWidth="200.0">
+            <VBox.margin>
+               <Insets bottom="20.0"/>
+            </VBox.margin>
+         </Separator>
+         <TextField fx:id="txt_code" alignment="CENTER" promptText="Code eingeben">
+            <VBox.margin>
+               <Insets bottom="10.0"/>
+            </VBox.margin>
+            <font>
+               <Font size="14.0"/>
+            </font>
+         </TextField>
+         <Label fx:id="lbl_level" text="Wähle Schwierigkeitsgrad">
+            <font>
+               <Font name="Arial" size="14.0"/>
+            </font>
+            <VBox.margin>
+               <Insets bottom="10.0"/>
+            </VBox.margin>
+         </Label>
+         <CheckBox fx:id="check_pro" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pro">
+            <VBox.margin>
+               <Insets bottom="20.0"/>
+            </VBox.margin>
+            <font>
+               <Font name="Arial" size="14.0"/>
+            </font>
+         </CheckBox>
+         <Separator prefWidth="200.0">
+            <VBox.margin>
+               <Insets bottom="10.0"/>
+            </VBox.margin>
+         </Separator>
+         <Button fx:id="btn_confirm" mnemonicParsing="false" onAction="#onClickConfirm" prefHeight="50.0"
+                 prefWidth="150.0" text="Bestätigen">
+            <font>
+               <Font name="Arial" size="14.0"/>
+            </font>
+         </Button>
+      </VBox>
+   </HBox>
 </AnchorPane>

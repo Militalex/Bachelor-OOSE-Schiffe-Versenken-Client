@@ -3,14 +3,11 @@ package de.gitlab.kaisoenmalex.windows;
 import de.gitlab.kaisoenmalex.api.IController;
 import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
@@ -59,26 +56,19 @@ public class LoginController implements IController<LoginController>, Initializa
         );
 
         cmb_session.getSelectionModel().select(0);
-
-
     }
 
     /**
-     * Send ConnectPacket to Server
+     * Connect to Server and sends ConnectPacket.
      */
+    public void onClickConfirm() {
 
-    public void pack(ActionEvent event) throws IOException {
+        final boolean isHost = cmb_session.getSelectionModel().getSelectedIndex() == 0;
+        final boolean isNoobVariant = !(check_pro.isSelected());
+        final boolean isRandomEnemy = check_random.isSelected();
+        final String code = txt_code.getText();
 
-        boolean isHost = cmb_session.getSelectionModel().getSelectedIndex() == 0;
-        boolean isNoobVariant = !(check_pro.isSelected());
-        boolean isRandomEnemey = check_random.isSelected();
-        String code = txt_code.getText();
-        if (isHost == true) { code = null; }
-
-
-        ConnectPacket connectPacket = new ConnectPacket(txt_name.getText(), isHost, isNoobVariant, isRandomEnemey, code, null);
+        ConnectPacket connectPacket = new ConnectPacket(txt_name.getText(), isHost, isNoobVariant, isRandomEnemy, (isHost ? null : code), null);
 
     }
-
-
 }
