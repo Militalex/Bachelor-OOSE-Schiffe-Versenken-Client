@@ -2,12 +2,8 @@ package de.gitlab.kaisoenmalex.windows;
 
 import de.gitlab.kaisoenmalex.api.IController;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import javafx.fxml.FXML;
-import org.slf4j.Logger;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 
@@ -31,8 +27,7 @@ public class MenuController implements IController<MenuController>, ILogger {
         BattleshipClientMain.changeScene("/FXML/shipsPlacer.fxml", "Schiffe platzieren", 800, 550, false);
     }
 
-    public void onClickRules() throws IOException {
+    public void onClickRules() {
         BattleshipClientMain.changeScene("/FXML/rules.fxml", "Regeln", 600, 400, false);
     }
-
 }
