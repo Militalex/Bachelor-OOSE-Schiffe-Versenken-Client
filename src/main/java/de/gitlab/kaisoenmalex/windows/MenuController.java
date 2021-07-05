@@ -5,8 +5,6 @@ import de.gitlab.kaisoenmalex.api.util.ILogger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-import java.io.IOException;
-
 /**
  * @author Kai Sturm
  * @version 1.0
