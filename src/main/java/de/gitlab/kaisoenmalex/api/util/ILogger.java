@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.1
  *
  * This interface give classes the functionality to use a logger.
  */
@@ -16,7 +16,7 @@ public interface ILogger{
     /**
      * Offers a Logger for static classes.
      */
-    Logger STATIC_LOGGER = LoggerFactory.getLogger("Static Logger");
+    Logger STATIC_LOGGER = LoggerFactory.getLogger("BattleshipStatic");
 
     default Logger getLogger(){
         return LoggerFactory.getLogger(this.getClass());
