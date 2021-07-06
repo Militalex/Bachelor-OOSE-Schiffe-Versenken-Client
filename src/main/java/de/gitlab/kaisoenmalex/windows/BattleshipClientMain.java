@@ -4,9 +4,6 @@ import de.gitlab.kaisoenmalex.api.IController;
 import de.gitlab.kaisoenmalex.api.util.FxUtils;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -19,7 +16,7 @@ import java.util.Objects;
 
 /**
  * @author Alexander Ley
- * @version 1.2
+ * @version 1.2.1
  * latest author: Alexander Ley
  *
  * This Class is the entry Point into the Application.
@@ -66,25 +63,7 @@ public class BattleshipClientMain extends Application implements ILogger {
      * @param ignoreException if the exception has to be ignored.
      */
     public static void changeScene(String fxmlFile, String title, int width, int height, boolean ignoreException) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(BattleshipClientMain.class.getResource(fxmlFile));
-
-            Parent root = fxmlLoader.load();
-
-            activeController = fxmlLoader.getController();
-
-            Scene scene = new Scene(root, width, height);
-
-            stage.setTitle(title);
-            stage.setScene(scene);
-        }
-        catch (Exception ex) {
-            if (!ignoreException) {
-                STATIC_LOGGER.error("Can't found: " + fxmlFile, ex);
-                ILogger.showError("Die n\u00e4chste Szene konnte nicht geladen werden.");
-                BattleshipClientMain.stage.close();
-            }
-        }
+        activeController = FxUtils.changeScene(stage, fxmlFile, title, width, height, ignoreException);
     }
 
     /**
