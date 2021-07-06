@@ -3,15 +3,15 @@ package de.gitlab.kaisoenmalex.windows;
 import de.gitlab.kaisoenmalex.api.IController;
 import de.gitlab.kaisoenmalex.api.util.FxUtils;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
+import de.gitlab.kaisoenmalex.api.util.ImageManager;
+import de.gitlab.kaisoenmalex.api.util.ImageUtil;
 import javafx.application.Application;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -22,11 +22,6 @@ import java.util.Objects;
  * This Class is the entry Point into the Application.
  */
 public class BattleshipClientMain extends Application implements ILogger {
-
-    /**
-     * A Hashmap containing all Images from textures folder. The Hashmap maps filename (with .png) and the corresponding Image.
-     */
-    public static final HashMap<String, Image> IMAGE_MAP = new HashMap<>();
 
     public static Application application;
 
@@ -47,7 +42,10 @@ public class BattleshipClientMain extends Application implements ILogger {
         loadImages();
 
         changeScene("/FXML/menu.fxml", "Schiffe Versenken", 600, 400, false);
+
         stage.show();
+
+        if (activeController == null) stage.close();
     }
 
     public static void main(String[] args) {
@@ -82,7 +80,7 @@ public class BattleshipClientMain extends Application implements ILogger {
 
         Arrays.stream(Objects.requireNonNull(textures.listFiles())).forEach(file -> {
             try {
-                IMAGE_MAP.put(file.getName(), FxUtils.loadImage(file));
+                ImageManager.IMAGE_MAP.put(file.getName(), ImageUtil.loadImage(file));
             } catch (IOException e) {
                 STATIC_LOGGER.error("Cannot load Image: " + file.getName(), e);
             }
