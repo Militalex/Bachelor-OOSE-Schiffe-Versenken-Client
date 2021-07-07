@@ -1,6 +1,6 @@
 package de.gitlab.kaisoenmalex.windows;
 
-import de.gitlab.kaisoenmalex.api.IController;
+import de.gitlab.kaisoenmalex.api.util.IController;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

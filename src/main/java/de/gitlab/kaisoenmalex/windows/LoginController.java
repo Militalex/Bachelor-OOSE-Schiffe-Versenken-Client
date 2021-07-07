@@ -1,11 +1,12 @@
 package de.gitlab.kaisoenmalex.windows;
 
-import de.gitlab.kaisoenmalex.api.IController;
+import de.gitlab.kaisoenmalex.api.util.IController;
 import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ResourceBundle;

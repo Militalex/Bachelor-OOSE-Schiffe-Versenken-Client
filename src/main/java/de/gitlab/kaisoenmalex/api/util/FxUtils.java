@@ -1,6 +1,5 @@
 package de.gitlab.kaisoenmalex.api.util;
 
-import de.gitlab.kaisoenmalex.api.IController;
 import de.gitlab.kaisoenmalex.windows.BattleshipClientMain;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

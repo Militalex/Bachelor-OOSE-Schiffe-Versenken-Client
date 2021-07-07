@@ -1,4 +1,4 @@
-package de.gitlab.kaisoenmalex.api;
+package de.gitlab.kaisoenmalex.api.util;
 
 /**
  * @author Alexander Ley

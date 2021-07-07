@@ -1,6 +1,6 @@
 package de.gitlab.kaisoenmalex.windows;
 
-import de.gitlab.kaisoenmalex.api.IController;
+import de.gitlab.kaisoenmalex.api.util.IController;
 import de.gitlab.kaisoenmalex.api.util.FxUtils;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
 import de.gitlab.kaisoenmalex.api.util.ImageManager;
@@ -67,7 +67,9 @@ public class BattleshipClientMain extends Application implements ILogger {
     /**
      * Load all Images from textures folder into Hashmap.
      */
-    private static void loadImages() {
+    public static void loadImages() {
+        ImageManager.IMAGE_MAP.clear();
+
         final File textures;
 
         try {
