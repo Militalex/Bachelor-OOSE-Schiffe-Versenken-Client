@@ -3,8 +3,11 @@ package de.gitlab.kaisoenmalex.api.util;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,9 +35,17 @@ public class TCPUtil implements ILogger{
      * @return Returns the port to connect via tcp.
      * @throws IOException if the request could not be executed due to cancellation, a connectivity problem or timeout.
      */
-    public static int requestConnection() throws IOException {
+    public static int requestConnection(ConnectPacket packet) throws IOException {
+        final String json = gson.toJson(packet);
+
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(SERVER_ADDRESS).build();
+        Request request = new Request.Builder()
+                .url(SERVER_ADDRESS)
+                .post(RequestBody.create(json, MediaType.parse("application/json; charset=utf-8")))
+                .build();
+
+
+
         return Integer.parseInt(Objects.requireNonNull(client.newCall(request).execute().body()).string());
     }
 
@@ -43,16 +54,16 @@ public class TCPUtil implements ILogger{
      * @return Returns a socket.
      * @throws IOException when the request could not be executed due to cancellation, a connectivity problem or timeout.
      */
-    public static Socket connectToServer(InetAddress host) throws IOException {
-        return new Socket(host, requestConnection());
+    public static Socket connectToServer(InetAddress host, ConnectPacket packet) throws IOException {
+        return new Socket(host, requestConnection(packet));
     }
 
     /**
      * @return Returns a socket.
      * @throws IOException when the request could not be executed due to cancellation, a connectivity problem or timeout.
      */
-    public static Socket connectToServer() throws IOException {
-        return new Socket(HOST_ADDRESS, requestConnection());
+    public static Socket connectToServer(ConnectPacket packet) throws IOException {
+        return new Socket(HOST_ADDRESS, requestConnection(packet));
     }
 
     /**
@@ -77,7 +88,7 @@ public class TCPUtil implements ILogger{
      * @param <T> Object type that is saved to json.
      */
     public static <T> void sendObject(PrintWriter writer, T obj){
-        final String json = gson.toJson(obj, new TypeToken<>(){}.getType());
+        final String json = gson.toJson(obj, new TypeToken<T>(){}.getType());
         writer.println(json);
     }
 
