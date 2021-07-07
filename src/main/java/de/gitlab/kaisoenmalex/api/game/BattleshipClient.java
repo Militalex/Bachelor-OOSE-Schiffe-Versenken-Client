@@ -1,4 +1,4 @@
-package de.gitlab.kaisoenmalex.api;
+package de.gitlab.kaisoenmalex.api.game;
 
 import de.gitlab.kaisoenmalex.api.network.ClientNetwork;
 
@@ -12,4 +12,9 @@ public class BattleshipClient {
 
     private String code;
     private ClientNetwork clientNetwork;
+
+    public BattleshipClient(String code, ClientNetwork clientNetwork) {
+        this.code = code;
+        this.clientNetwork = clientNetwork;
+    }
 }
