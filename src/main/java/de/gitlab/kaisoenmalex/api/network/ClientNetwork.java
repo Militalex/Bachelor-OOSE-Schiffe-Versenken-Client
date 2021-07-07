@@ -1,6 +1,7 @@
 package de.gitlab.kaisoenmalex.api.network;
 
-import de.gitlab.kaisoenmalex.api.BattleshipClient;
+import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
+import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
 import de.gitlab.kaisoenmalex.api.util.TCPUtil;
 import de.gitlab.kaisoenmalex.api.util.Tickable;
@@ -32,10 +33,10 @@ public class ClientNetwork implements ILogger, Closeable {
      * Connect to Server via tcp.
      * @throws IOException when the request could not be executed due to cancellation, a connectivity problem or timeout.
      */
-    public ClientNetwork(BattleshipClient client) throws IOException {
+    public ClientNetwork(BattleshipClient client, ConnectPacket packet) throws IOException {
         this.client = client;
 
-        final Socket socket = TCPUtil.connectToServer();
+        final Socket socket = TCPUtil.connectToServer(packet);
 
         this.writer = TCPUtil.getWriter(socket);
         this.listener = new Listener(socket);
