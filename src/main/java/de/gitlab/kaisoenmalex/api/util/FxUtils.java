@@ -2,8 +2,10 @@ package de.gitlab.kaisoenmalex.api.util;
 
 import de.gitlab.kaisoenmalex.windows.BattleshipClientMain;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.Nullable;
 
