@@ -51,4 +51,8 @@ public class FxUtils implements ILogger{
             return null;
         }
     }
+
+    public static Node getNodeFromGridPane(GridPane gridPane, int col, int row, int columnCount) {
+        return gridPane.getChildren().get(row * columnCount + col);
+    }
 }
