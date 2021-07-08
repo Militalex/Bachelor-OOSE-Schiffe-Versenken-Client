@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.1
  *
  * This class represents one field in GameArea and manage all field properties including textures.
  */
@@ -68,7 +68,6 @@ public class Field implements ILogger {
     public void setShip(ShipPart part){
         this.isShip = true;
         this.isShoot = false;
-        this.isMarked = false;
         manager.addKey(part.imageKey, part.rotation);
     }
 
@@ -78,7 +77,6 @@ public class Field implements ILogger {
     public void setWater(){
         this.isShip = false;
         this.isShoot = false;
-        this.isMarked = false;
         manager.clear();
         manager.addKey("water.png");
     }
@@ -87,9 +85,12 @@ public class Field implements ILogger {
      * Marks a field to say that a ship is not placeable or to visualize that water field was shoot.
      */
     public void markField(){
-        if (isShip()) throw new IllegalStateException("Cannot mark field.");
+        if (this.isMarked) return;
+
         this.isMarked = true;
-        manager.addKey("shot_water.png");
+
+        if (manager.size() > 1) manager.insertKey("shot_water.png", 1);
+        else manager.addKey("shot_water.png");
     }
 
     /**
@@ -102,7 +103,7 @@ public class Field implements ILogger {
         this.isShoot = true;
 
         if (isWater()) manager.addKey("shot_water.png");
-        else manager.addKey("shot_ship");
+        else manager.addKey("shot_ship.png");
 
         return isShip();
     }
