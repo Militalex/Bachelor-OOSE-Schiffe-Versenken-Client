@@ -71,5 +71,11 @@ public class LoginController implements IController<LoginController>, Initializa
 
         ConnectPacket connectPacket = new ConnectPacket(txt_name.getText(), isHost, isNoobVariant, isRandomEnemy, (isHost ? null : code), null);
 
+        if (isHost) {
+            BattleshipClientMain.changeScene("/FXML/waitNew.fxml", "Warte - Neues Spiel", 800, 550, false);
+        } else {
+            BattleshipClientMain.changeScene("/FXML/waitJoin.fxml", "Warte - Spiel beitreten", 800, 550, false);
+        }
+
     }
 }
