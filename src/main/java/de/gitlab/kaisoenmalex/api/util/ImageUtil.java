@@ -1,12 +1,16 @@
 package de.gitlab.kaisoenmalex.api.util;
 
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.transform.Rotate;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -17,7 +21,7 @@ import java.util.List;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.1
  *
  * This class offers help methods to work with JavaFx Images.
  */
@@ -124,7 +128,10 @@ public class ImageUtil {
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
         gc.drawImage(img, 0, 0,  imgWidth, imgHeight);
 
-        return canvas.snapshot(null, new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight()));
+        SnapshotParameters snap = new SnapshotParameters();
+        snap.setFill(Color.color(1, 1, 1, 0));
+
+        return canvas.snapshot(snap, new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight()));
     }
 
     /**
