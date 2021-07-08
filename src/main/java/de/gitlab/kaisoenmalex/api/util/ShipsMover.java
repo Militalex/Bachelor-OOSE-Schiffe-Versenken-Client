@@ -44,14 +44,14 @@ public class ShipsMover extends Tickable {
 
         double mouseX = x - winLocX - ((!isHorizontal) ? 25 :
                 (shipName.equals("pane_5ship_dad")) ? -50 :
-                (shipName.equals("pane_4ship_dad")) ? -40 :
-                (shipName.equals("pane_3ship_dad")) ? -30 : -20
+                (shipName.equals("pane_4ship_dad")) ? -30 :
+                (shipName.equals("pane_3ship_dad")) ? -10 : 10
         );
 
         double mouseY = y - winLocY - ((!isHorizontal) ? 50 :
                 (shipName.equals("pane_5ship_dad")) ? 120 :
-                (shipName.equals("pane_4ship_dad")) ? 120 :
-                (shipName.equals("pane_3ship_dad")) ? 120 : 120
+                (shipName.equals("pane_4ship_dad")) ? 105 :
+                (shipName.equals("pane_3ship_dad")) ? 85 : 65
         );
 
         if ((mouseX > 0 && mouseX < winWidth) && (mouseY > 0 && mouseY < winHeight)){
