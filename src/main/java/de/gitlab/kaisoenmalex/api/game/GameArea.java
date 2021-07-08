@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.1
  *
  * This class controls gameArea and offers Methods to place ships, shoot and other cool staff.
  */
@@ -63,7 +63,7 @@ public class GameArea {
 
                 Field field = getField(ix, iy);
 
-                if (field.isShip() || field.isMarked()) continue;
+                if (field.isMarked()) continue;
 
                 field.markField();
             }
@@ -120,6 +120,7 @@ public class GameArea {
             Field.ShipPart part = (i == 0) ? (
                     (vertical) ? Field.ShipPart.TOP_NORTH : Field.ShipPart.TOP_WEST
             ) : (i == length - 1) ? (
+                    (length == 2) ? Field.ShipPart.MIDDLE :
                     (vertical) ? Field.ShipPart.TOP_SOUTH : Field.ShipPart.TOP_EAST
             ) : Field.ShipPart.MIDDLE;
 
