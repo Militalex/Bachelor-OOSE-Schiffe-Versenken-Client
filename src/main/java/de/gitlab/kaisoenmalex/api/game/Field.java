@@ -23,14 +23,8 @@ public class Field implements ILogger {
     private final ImageManager manager = new ImageManager("water.png");
 
     public Field(int xCord, int yCord){
-        this(xCord, yCord, false, false);
-    }
-
-    public Field(int xCord, int yCord, boolean isShoot, boolean isShip) {
         this.xCord = xCord;
         this.yCord = yCord;
-        this.isShoot = isShoot;
-        this.isShip = isShip;
     }
 
     public int getXCord() {
