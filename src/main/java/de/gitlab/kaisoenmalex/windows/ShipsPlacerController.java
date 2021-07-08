@@ -16,9 +16,10 @@ import java.util.ResourceBundle;
 
 /**
  * @author Kai Sturm
- * @version 1.0
+ * @version 1.1
+ * latest author: Alexander Ley
  *
- * This class handles functionality of placing ships.
+ * This class handles functionality of ships placer window.
  */
 public class ShipsPlacerController implements IController<ShipsPlacerController>, ILogger, Initializable {
 
@@ -48,8 +49,14 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
     @FXML private Pane pane_2_4ship;
     @FXML private Pane pane_2ship_dad;
 
+    /**
+     * Maps normal ship-panes to dummy moving ship.
+     */
     private final HashMap<Pane, Pane> PaneDadMap = new HashMap<>();
 
+    /**
+     * Instance Holder of active ShipsMover. Note it should only one ShipsMover active.
+     */
     private ShipsMover shipsMover;
 
     @Override
@@ -58,9 +65,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
     }
 
     /**
-     * This method creates the game-area as a gridpane, consisting of imageview.
-     * @param location ...
-     * @param resources ...
+     * Fills gridPane (GameArea) with imageViews and do several initialize stuff.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -91,11 +96,14 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
         PaneDadMap.put(pane_2_4ship, pane_2ship_dad);
 
         AREA.placeShip(1, 1, 4, true);
+        AREA.placeShip(3, 1, 2, false);
+        AREA.shootField(8, 8);
+        AREA.shootField(1, 1);
         renderArea();
     }
 
     /**
-     *This method sets the background of each imageview to the texture "water.png".
+     * Renders area to put the saved Images from field into imageViews.
      */
     public void renderArea(){
         for (int x = 0; x < 10; x++){
@@ -110,8 +118,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
     }
 
     /**
-     * This method uses a shipsMover object to move a ship to gridPane.
-     * @param event clicking on a ship.
+     * Creates a shipsMover object to move a ship around.
      */
     public void onClickShip(MouseEvent event) {
         Pane currentShip = (Pane)event.getSource();
@@ -119,21 +126,21 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
     }
 
     /**
-     * This method resets the drag and drop ship to the place of origin.
+     * Stops the active shipsMover.
      */
     public void onClickDadShip() {
         shipsMover.stop();
     }
 
     /**
-     * This method rotates the ship by 90 degrees when scrollin the mouse wheel.
+     * Rotates the ship by 90 degrees when scrolling the mouse wheel.
      */
     public void onScroll(){
         shipsMover.rotate();
     }
 
     /**
-     * Shows the "rules" page.
+     * Shows "rules" window.
      */
     public void onClickRules() {
         BattleshipClientMain.changeScene("/FXML/rules.fxml", "Regeln", 600, 400, false);
