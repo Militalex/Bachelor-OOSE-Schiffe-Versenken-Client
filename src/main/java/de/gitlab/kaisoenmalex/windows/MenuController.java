@@ -22,10 +22,10 @@ public class MenuController implements IController<MenuController>, ILogger {
     }
 
     public void onClickPlay() {
-        BattleshipClientMain.changeScene("/FXML/shipsPlacer.fxml", "Schiffe platzieren", 800, 550, false);
+        BattleshipClientApp.changeScene("/FXML/shipsPlacer.fxml", "Schiffe platzieren", 800, 550, false);
     }
 
     public void onClickRules() {
-        BattleshipClientMain.changeScene("/FXML/rules.fxml", "Regeln", 600, 400, false);
+        BattleshipClientApp.changeScene("/FXML/rules.fxml", "Regeln", 600, 400, false);
     }
 }

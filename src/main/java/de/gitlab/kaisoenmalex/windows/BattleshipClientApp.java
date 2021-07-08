@@ -21,7 +21,7 @@ import java.util.Objects;
  *
  * This Class is the entry Point into the Application.
  */
-public class BattleshipClientMain extends Application implements ILogger {
+public class BattleshipClientApp extends Application implements ILogger {
 
     public static Application application;
 
@@ -36,7 +36,7 @@ public class BattleshipClientMain extends Application implements ILogger {
      */
     @Override
     public void start(Stage stage){
-        BattleshipClientMain.stage = stage;
+        BattleshipClientApp.stage = stage;
         application = this;
 
         loadImages();
@@ -73,7 +73,7 @@ public class BattleshipClientMain extends Application implements ILogger {
         final File textures;
 
         try {
-            textures = new File(Objects.requireNonNull(BattleshipClientMain.class.getResource("/textures")).toURI());
+            textures = new File(Objects.requireNonNull(BattleshipClientApp.class.getResource("/textures")).toURI());
         }
         catch (URISyntaxException | NullPointerException e) {
             STATIC_LOGGER.error("Cannot load textures folder.", e);

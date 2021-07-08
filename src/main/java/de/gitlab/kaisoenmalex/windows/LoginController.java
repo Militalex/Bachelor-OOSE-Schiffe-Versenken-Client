@@ -96,9 +96,9 @@ public class LoginController implements IController<LoginController>, Initializa
 
 
 
-        BattleshipClientMain.changeScene("/FXML/wait.fxml", "Warte - Spiel beitreten", 800, 550, false);
+        BattleshipClientApp.changeScene("/FXML/wait.fxml", "Warte - Spiel beitreten", 800, 550, false);
 
-        WaitController waitController = (WaitController) BattleshipClientMain.activeController.getInstance();
+        WaitController waitController = (WaitController) BattleshipClientApp.activeController.getInstance();
 
         waitController.lbl_code.setVisible(false);
         if (isHost) {

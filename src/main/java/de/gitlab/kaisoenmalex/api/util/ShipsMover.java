@@ -1,6 +1,6 @@
 package de.gitlab.kaisoenmalex.api.util;
 
-import de.gitlab.kaisoenmalex.windows.BattleshipClientMain;
+import de.gitlab.kaisoenmalex.windows.BattleshipClientApp;
 import javafx.scene.layout.Pane;
 
 import java.awt.*;
@@ -36,11 +36,11 @@ public class ShipsMover extends Tickable {
         pane_InVisible.setVisible(false);
         String shipName = pane_moving.getId();
 
-        double winLocX = BattleshipClientMain.stage.getX();
-        double winLocY = BattleshipClientMain.stage.getY();
+        double winLocX = BattleshipClientApp.stage.getX();
+        double winLocY = BattleshipClientApp.stage.getY();
 
-        double winWidth = BattleshipClientMain.stage.getWidth();
-        double winHeight = BattleshipClientMain.stage.getHeight();
+        double winWidth = BattleshipClientApp.stage.getWidth();
+        double winHeight = BattleshipClientApp.stage.getHeight();
 
         double mouseX = x - winLocX - ((!isHorizontal) ? 25 :
                 (shipName.equals("pane_5ship_dad")) ? -50 :

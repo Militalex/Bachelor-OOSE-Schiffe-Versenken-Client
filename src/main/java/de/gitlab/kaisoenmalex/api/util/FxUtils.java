@@ -1,6 +1,6 @@
 package de.gitlab.kaisoenmalex.api.util;
 
-import de.gitlab.kaisoenmalex.windows.BattleshipClientMain;
+import de.gitlab.kaisoenmalex.windows.BattleshipClientApp;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -29,7 +29,7 @@ public class FxUtils implements ILogger{
      */
     public static @Nullable IController<?> changeScene(Stage stage, String fxmlFile, String title, int width, int height, boolean ignoreException) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(BattleshipClientMain.class.getResource(fxmlFile));
+            FXMLLoader fxmlLoader = new FXMLLoader(BattleshipClientApp.class.getResource(fxmlFile));
 
             Parent root = fxmlLoader.load();
 
