@@ -41,7 +41,7 @@ public class BattleshipClientMain extends Application implements ILogger {
 
         loadImages();
 
-        changeScene("/FXML/menu.fxml", "Schiffe Versenken", 600, 400, false);
+        changeScene("/FXML/login.fxml", "Schiffe Versenken", 600, 400, false);
 
         stage.show();
 
