@@ -5,6 +5,7 @@ import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
 import de.gitlab.kaisoenmalex.api.util.TCPUtil;
 import de.gitlab.kaisoenmalex.api.util.Tickable;
+import de.gitlab.kaisoenmalex.api.util.Tuple;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
@@ -16,7 +17,7 @@ import java.util.List;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.1
  *
  * This Class helps to communicate with Server. It can send things to server and handle server requests.
  */
@@ -36,10 +37,10 @@ public class ClientNetwork implements ILogger, Closeable {
     public ClientNetwork(BattleshipClient client, ConnectPacket packet) throws IOException {
         this.client = client;
 
-        final Socket socket = TCPUtil.connectToServer(packet);
+        final Tuple<Socket, Tuple<String, Integer>> gameInfos = TCPUtil.connectToServer(packet);
 
-        this.writer = TCPUtil.getWriter(socket);
-        this.listener = new Listener(socket);
+        this.writer = TCPUtil.getWriter(gameInfos.getKey());
+        this.listener = new Listener(gameInfos.getKey());
     }
 
 

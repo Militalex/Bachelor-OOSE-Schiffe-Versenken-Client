@@ -19,9 +19,9 @@ import java.util.Objects;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.1
  *
- * This class offers basic tcp methods.
+ * This class offers tcp methods.
  */
 public class TCPUtil implements ILogger{
 
@@ -35,7 +35,7 @@ public class TCPUtil implements ILogger{
      * @return Returns the port to connect via tcp.
      * @throws IOException if the request could not be executed due to cancellation, a connectivity problem or timeout.
      */
-    public static int requestConnection(ConnectPacket packet) throws IOException {
+    public static Tuple<String, Integer> requestConnection(ConnectPacket packet) throws IOException {
         final String json = gson.toJson(packet);
 
         OkHttpClient client = new OkHttpClient();
@@ -44,9 +44,9 @@ public class TCPUtil implements ILogger{
                 .post(RequestBody.create(json, MediaType.parse("application/json; charset=utf-8")))
                 .build();
 
+        String obj = Objects.requireNonNull(client.newCall(request).execute().body()).string();
 
-
-        return Integer.parseInt(Objects.requireNonNull(client.newCall(request).execute().body()).string());
+        return gson.fromJson(obj, new TypeToken<Tuple<String, Integer>>(){}.getType());
     }
 
     /**
@@ -54,16 +54,20 @@ public class TCPUtil implements ILogger{
      * @return Returns a socket.
      * @throws IOException when the request could not be executed due to cancellation, a connectivity problem or timeout.
      */
-    public static Socket connectToServer(InetAddress host, ConnectPacket packet) throws IOException {
-        return new Socket(host, requestConnection(packet));
+    public static Tuple<Socket, Tuple<String, Integer>> connectToServer(InetAddress host, ConnectPacket packet) throws IOException {
+        final Tuple<String, Integer> gameInfo = requestConnection(packet);
+
+        return new Tuple<>(new Socket(host, gameInfo.getValue()), gameInfo);
     }
 
     /**
      * @return Returns a socket.
      * @throws IOException when the request could not be executed due to cancellation, a connectivity problem or timeout.
      */
-    public static Socket connectToServer(ConnectPacket packet) throws IOException {
-        return new Socket(HOST_ADDRESS, requestConnection(packet));
+    public static Tuple<Socket, Tuple<String, Integer>> connectToServer(ConnectPacket packet) throws IOException {
+        final Tuple<String, Integer> gameInfo = requestConnection(packet);
+
+        return new Tuple<>(new Socket(HOST_ADDRESS, gameInfo.getValue()), gameInfo);
     }
 
     /**
