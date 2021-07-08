@@ -7,7 +7,7 @@ import java.awt.*;
 
 /**
  * @author Kai Sturm
- * @version 1.0
+ * @version 1.1
  *
  * This class offers methods that are needed for placing ships.
  */
