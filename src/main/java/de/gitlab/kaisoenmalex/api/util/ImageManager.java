@@ -1,6 +1,5 @@
 package de.gitlab.kaisoenmalex.api.util;
 
-import com.google.gson.annotations.Expose;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +11,7 @@ import java.util.List;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.2
  *
  * This class can manage an amount (Menge) of images and there rotations.
  * All images were merged together (with individual rotation) to create one image.
@@ -28,17 +27,16 @@ public class ImageManager {
     /**
      * List of all imageKeys which were later merged together.
      */
-    private final List<String> imageKeys = new ArrayList<>();
+    private List<String> imageKeys = new ArrayList<>();
     /**
      * List of corresponding rotations.
      */
-    private final List<Rotation> imageRot = new ArrayList<>();
+    private List<Rotation> imageRot = new ArrayList<>();
 
     /**
      * Rendered Image
      */
-    @Expose(serialize = false, deserialize = false)
-    @Nullable private Image image;
+    @Nullable private transient Image image;
 
     /**
      * Creates an empty ImageManager (imageKeys and imageRot are empty).
@@ -77,6 +75,46 @@ public class ImageManager {
      */
     public void addKey(@NotNull String key){
         addKey(key, Rotation.NORTH);
+    }
+
+    /**
+     * Insert key in image pipeline at specific position.
+     */
+    public void insertKey(@NotNull String key, Rotation rot, int pos){
+        imageKeys = insert(imageKeys, key, pos);
+        imageRot = insert(imageRot, rot, pos);
+    }
+
+    /**
+     * Insert key in image pipeline at specific position.
+     */
+    public void insertKey(@NotNull String key, int pos){
+        insertKey(key, Rotation.NORTH, pos);
+    }
+
+    /**
+     * Help method to insert element at specific position into list. The origin list won't be modified.
+     * @return Returns new list with inserted element.
+     */
+    private <T> List<T> insert(List<T> list, @NotNull T element, int pos){
+        if (pos < 0 || pos >= list.size()) throw new IllegalArgumentException(pos + " is not in list.");
+
+        List<T> retList = new ArrayList<>();
+
+
+        for (int i = 0; i < list.size(); i++){
+            if (i == pos){
+                retList.add(element);
+            }
+
+            retList.add(list.get(i));
+        }
+
+        return retList;
+    }
+
+    public int size(){
+        return imageKeys.size();
     }
 
     /**
