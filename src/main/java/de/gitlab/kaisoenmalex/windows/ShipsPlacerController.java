@@ -2,10 +2,7 @@ package de.gitlab.kaisoenmalex.windows;
 
 import de.gitlab.kaisoenmalex.api.game.Field;
 import de.gitlab.kaisoenmalex.api.game.GameArea;
-import de.gitlab.kaisoenmalex.api.util.FxUtils;
-import de.gitlab.kaisoenmalex.api.util.IController;
-import de.gitlab.kaisoenmalex.api.util.ILogger;
-import de.gitlab.kaisoenmalex.api.util.ShipsMover;
+import de.gitlab.kaisoenmalex.api.util.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,20 +11,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import java.awt.*;
+import java.io.Closeable;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
  * @author Kai Sturm
- * @version 1.2
- * latest author: Kai Sturm & Alexander Ley
+ * @version 1.3
+ * latest author: Alexander Ley
  *
  * This class handles functionality of ships placer window.
  */
-public class ShipsPlacerController implements IController<ShipsPlacerController>, ILogger, Initializable {
-
-    //TODO: Schiffe aus dem GridPane einzeln rauslöschen.
+public class ShipsPlacerController implements IController<ShipsPlacerController>, ILogger, Initializable, Closeable {
 
     public static final GameArea AREA = new GameArea();
 
@@ -75,12 +71,31 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         btn_accept.setDisable(true);
 
         for (int x = 0; x < 10; x++){
             for (int y = 0; y < 10; y++){
                 final Pane pane = new Pane();
+
+                pane.setOnMouseClicked(event -> {
+                    if (event.getButton() == MouseButton.PRIMARY && shipsMover == null){
+                        Tuple<Integer, Integer> cord = FxUtils.getCordFromGridPane(gridPane, pane, 10, 10);
+                        assert cord != null;
+
+                        if (AREA.getField(cord.getValue(), cord.getKey()).isWater()) return;
+
+                        int length = AREA.removeShip(cord.getValue(), cord.getKey());
+
+                        Pane ship = (length == 5) ? pane_5ship :
+                                (length == 4) ? (!pane_4_1ship.isVisible() ? pane_4_1ship : pane_4_2ship) :
+                                        (length == 3) ? (!pane_3_1ship.isVisible() ? pane_3_1ship : !pane_3_2ship.isVisible() ? pane_3_2ship : pane_3_3ship) :
+                                                /*length == 2*/ (!pane_2_1ship.isVisible() ? pane_2_1ship : !pane_2_2ship.isVisible() ? pane_2_2ship : !pane_2_3ship.isVisible() ? pane_2_3ship : pane_2_4ship);
+
+
+                        shipsMover = new ShipsMover(paneDadMap.get(ship), ship);
+                        renderArea();
+                    }
+                });
 
                 gridPane.add(pane, x, y);
             }
@@ -98,8 +113,14 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
         paneDadMap.put(pane_2_4ship, pane_2ship_dad);
 
         renderArea();
+    }
 
-
+    @Override
+    public void close() {
+        if (shipsMover != null) {
+            shipsMover.stop();
+            shipsMover = null;
+        }
     }
 
     /**
@@ -141,12 +162,12 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
      * Stops the active shipsMover.
      */
     public void onClickDadShip(MouseEvent event) {
-        if (event.getButton() == MouseButton.PRIMARY) {
+        if (event.getButton() == MouseButton.SECONDARY){
             shipsMover.stop();
             shipsMover = null;
             renderArea();
         }
-        else if (event.getButton() == MouseButton.SECONDARY){
+        if (event.getButton() == MouseButton.PRIMARY) {
             double x = MouseInfo.getPointerInfo().getLocation().getX();
             double y = MouseInfo.getPointerInfo().getLocation().getY();
 
@@ -159,12 +180,17 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
             int mouseX = (int) ((x - winLocX - gridPaneX) / 39) - 1;
             int mouseY = (int) ((y - winLocY - gridPaneY) / 39) - 3;
 
-            if ((mouseX >= 0 && mouseX < 10) && (mouseY >= 0 && mouseY < 10)){
+            if ((mouseX >= 0 && mouseX < 10) && (mouseY >= 0 && mouseY < 10)) {
                 if (AREA.placeShip(mouseX, mouseY, shipsMover.getShipLength(), shipsMover.isVertical())) {
                     shipsMover.stopInvisible();
                     shipsMover = null;
                     renderArea();
                 }
+            }
+            else{
+                shipsMover.stop();
+                shipsMover = null;
+                renderArea();
             }
         }
     }
