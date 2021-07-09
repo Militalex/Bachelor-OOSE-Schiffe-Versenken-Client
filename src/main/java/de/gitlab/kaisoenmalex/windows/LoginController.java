@@ -88,7 +88,8 @@ public class LoginController implements IController<LoginController>, Initializa
 
         try {
             TCPUtil.connectToServer(connectPacket);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             logger.error("Cannot connect to server", e);
             ILogger.showError("Verbindung zum Server fehlgeschlagen! Versuche es erneut!");
             return;
