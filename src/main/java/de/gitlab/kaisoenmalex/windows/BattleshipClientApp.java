@@ -8,6 +8,7 @@ import de.gitlab.kaisoenmalex.api.util.ImageUtil;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -46,6 +47,18 @@ public class BattleshipClientApp extends Application implements ILogger {
         stage.show();
 
         if (activeController == null) stage.close();
+    }
+
+    @Override
+    public void stop() {
+        if (activeController instanceof Closeable){
+            try {
+                ((Closeable) activeController).close();
+            }
+            catch (IOException e) {
+                getLogger().warn("Cannot close " + activeController, e);
+            }
+        }
     }
 
     public static void main(String[] args) {
