@@ -36,7 +36,12 @@ public abstract class Tickable {
      */
     public void stop() {
         timer.cancel();
+    }
 
+    /**
+     * Refreshes timer object, so that it can start again. Note Refreshing timer lets application open.
+     */
+    public void refresh(){
         timer = new Timer();
         task = new TimerTask() {
             @Override
