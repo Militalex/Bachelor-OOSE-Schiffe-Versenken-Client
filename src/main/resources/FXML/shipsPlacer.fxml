@@ -293,7 +293,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="btn_clear" mnemonicParsing="false" prefHeight="30.0" text="Löschen">
+                  <Button fx:id="btn_clear" mnemonicParsing="false" onAction="#onClickClear" prefHeight="30.0" text="Löschen">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
