@@ -52,7 +52,26 @@ public class FxUtils implements ILogger{
         }
     }
 
+    /**
+     * @param col Column index.
+     * @param row Row Index.
+     * @return Returns Node from GridPane.
+     */
     public static Node getNodeFromGridPane(GridPane gridPane, int col, int row, int columnCount) {
         return gridPane.getChildren().get(row * columnCount + col);
+    }
+
+    /**
+     * @return Returns (x, y) coordinate from gridPane.
+     */
+    public static HomogenTuple<Integer> getCordFromGridPane(GridPane gridPane, Node node, int columnCount, int rowCount){
+        for (int x = 0; x < columnCount; x++){
+            for (int y = 0; y < rowCount; y++){
+                if (getNodeFromGridPane(gridPane, x, y, columnCount) == node){
+                    return new HomogenTuple<>(x, y);
+                }
+            }
+        }
+        return null;
     }
 }
