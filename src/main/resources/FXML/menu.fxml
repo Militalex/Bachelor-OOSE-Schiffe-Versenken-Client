@@ -7,31 +7,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.gitlab.kaisoenmalex.windows.MenuController">
-   <children>
-      <HBox alignment="CENTER" layoutX="200.0" layoutY="150.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Button fx:id="btn_play" alignment="CENTER" mnemonicParsing="false" onAction="#onClickPlay" text="Spielen">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="btn_rules" alignment="CENTER" mnemonicParsing="false" onAction="#onClickRules" text="Regeln">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </VBox>
-         </children>
-      </HBox>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="de.gitlab.kaisoenmalex.windows.MenuController">
+   <HBox alignment="CENTER" layoutX="200.0" layoutY="150.0" prefHeight="100.0" prefWidth="200.0"
+         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+         AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+         <HBox.margin>
+            <Insets/>
+         </HBox.margin>
+         <Button fx:id="btn_play" alignment="CENTER" mnemonicParsing="false" onAction="#onClickPlay"
+                 text="Spielen">
+            <font>
+               <Font name="Arial" size="18.0"/>
+            </font>
+            <VBox.margin>
+               <Insets bottom="20.0"/>
+            </VBox.margin>
+         </Button>
+         <Button fx:id="btn_rules" alignment="CENTER" mnemonicParsing="false" onAction="#onClickRules"
+                 text="Regeln">
+            <font>
+               <Font name="Arial" size="18.0"/>
+            </font>
+         </Button>
+      </VBox>
+   </HBox>
 </AnchorPane>
