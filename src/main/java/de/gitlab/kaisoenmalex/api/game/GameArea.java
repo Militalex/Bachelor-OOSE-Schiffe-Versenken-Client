@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * @author Alexander Ley
- * @version 1.1
+ * @version 1.2
  *
  * This class controls gameArea and offers Methods to place ships, shoot and other cool staff.
  */
@@ -82,7 +82,7 @@ public class GameArea {
 
                 if (field.isShip() || isShipAround(ix, iy)) continue;
 
-                field.setWater();
+                field.unmarkField();
             }
         }
     }
@@ -183,6 +183,14 @@ public class GameArea {
         if (field.isShoot()) return null;
 
         return field.shoot();
+    }
+
+    /**
+     * Clears area by removing all ships and marks.
+     */
+    public void clear(){
+        Arrays.stream(area).forEach(fields ->
+                Arrays.stream(fields).forEach(Field::clear));
     }
 
     /**
