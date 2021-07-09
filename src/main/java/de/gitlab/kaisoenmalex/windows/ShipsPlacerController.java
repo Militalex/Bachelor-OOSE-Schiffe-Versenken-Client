@@ -52,7 +52,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
     /**
      * Maps normal ship-panes to dummy moving ship.
      */
-    private final HashMap<Pane, Pane> PaneDadMap = new HashMap<>();
+    private final HashMap<Pane, Pane> paneDadMap = new HashMap<>();
 
     /**
      * Instance Holder of active ShipsMover. Note it should only one ShipsMover active.
@@ -84,22 +84,24 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
             }
         }
 
-        PaneDadMap.put(pane_5ship, pane_5ship_dad);
-        PaneDadMap.put(pane_4_1ship, pane_4ship_dad);
-        PaneDadMap.put(pane_4_2ship, pane_4ship_dad);
-        PaneDadMap.put(pane_3_1ship, pane_3ship_dad);
-        PaneDadMap.put(pane_3_2ship, pane_3ship_dad);
-        PaneDadMap.put(pane_3_3ship, pane_3ship_dad);
-        PaneDadMap.put(pane_2_1ship, pane_2ship_dad);
-        PaneDadMap.put(pane_2_2ship, pane_2ship_dad);
-        PaneDadMap.put(pane_2_3ship, pane_2ship_dad);
-        PaneDadMap.put(pane_2_4ship, pane_2ship_dad);
+        paneDadMap.put(pane_5ship, pane_5ship_dad);
+        paneDadMap.put(pane_4_1ship, pane_4ship_dad);
+        paneDadMap.put(pane_4_2ship, pane_4ship_dad);
+        paneDadMap.put(pane_3_1ship, pane_3ship_dad);
+        paneDadMap.put(pane_3_2ship, pane_3ship_dad);
+        paneDadMap.put(pane_3_3ship, pane_3ship_dad);
+        paneDadMap.put(pane_2_1ship, pane_2ship_dad);
+        paneDadMap.put(pane_2_2ship, pane_2ship_dad);
+        paneDadMap.put(pane_2_3ship, pane_2ship_dad);
+        paneDadMap.put(pane_2_4ship, pane_2ship_dad);
 
         AREA.placeShip(1, 1, 4, true);
         AREA.placeShip(3, 1, 2, false);
         AREA.shootField(8, 8);
         AREA.shootField(1, 1);
         renderArea();
+
+
     }
 
     /**
@@ -108,13 +110,21 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
     public void renderArea(){
         for (int x = 0; x < 10; x++){
             for (int y = 0; y < 10; y++) {
-                final ImageView imageView = (ImageView) FxUtils.getNodeFromGridPane(gridPane, x, y, 10);
+                final Pane pane = ((Pane) FxUtils.getNodeFromGridPane(gridPane, x, y, 10));
                 final Field field = AREA.getField(y, x);
 
-                imageView.setImage(field.getImage());
-                imageView.setStyle("-fx-border-color: black");
+                pane.setBackground(new Background(
+                        new BackgroundImage(field.getImage(), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                                new BackgroundSize(39, 39, false, false, false, false)))
+                );
             }
         }
+
+        btn_accept.setDisable(shipsMover != null || pane_5ship.isVisible() || pane_4_1ship.isVisible() || pane_4_2ship.isVisible()
+                || pane_3_1ship.isVisible() || pane_3_2ship.isVisible() || pane_3_3ship.isVisible()
+                || pane_2_1ship.isVisible() || pane_2_2ship.isVisible() || pane_2_3ship.isVisible() || pane_2_4ship.isVisible());
+        btn_clear.setDisable(shipsMover != null);
+        btn_rules.setDisable(shipsMover != null);
     }
 
     /**
@@ -122,7 +132,8 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
      */
     public void onClickShip(MouseEvent event) {
         Pane currentShip = (Pane)event.getSource();
-        shipsMover = new ShipsMover(PaneDadMap.get(currentShip), currentShip);
+        shipsMover = new ShipsMover(paneDadMap.get(currentShip), currentShip);
+        renderArea();
     }
 
     /**
@@ -137,6 +148,12 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
      */
     public void onScroll(){
         shipsMover.rotate();
+    }
+
+    public void onClickClear(){
+        AREA.clear();
+        paneDadMap.keySet().forEach(pane -> pane.setVisible(true));
+        renderArea();
     }
 
     /**
