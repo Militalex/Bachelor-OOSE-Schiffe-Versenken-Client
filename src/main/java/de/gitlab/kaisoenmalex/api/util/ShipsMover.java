@@ -7,8 +7,8 @@ import java.awt.*;
 
 /**
  * @author Kai Sturm
- * @version 1.1
- * last author: Alexander Ley
+ * @version 1.2
+ * last author: Kai Sturm & Alexander Ley
  *
  * This class can moves ship around by binding them to mouse cursor.
  */
@@ -65,6 +65,17 @@ public class ShipsMover extends Tickable {
             pane_moving.setTranslateX(mouseX);
             pane_moving.setTranslateY(mouseY);
         }
+    }
+
+    public boolean isVertical() {
+        return !isHorizontal;
+    }
+
+    public int getShipLength(){
+        String shipName = pane_moving.getId();
+        return (shipName.equals("pane_5ship_dad")) ? 5 :
+               (shipName.equals("pane_4ship_dad")) ? 4 :
+               (shipName.equals("pane_3ship_dad")) ? 3 : 2;
     }
 
     /**
