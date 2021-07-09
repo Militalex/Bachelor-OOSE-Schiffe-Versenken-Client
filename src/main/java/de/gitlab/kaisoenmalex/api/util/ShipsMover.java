@@ -80,6 +80,15 @@ public class ShipsMover extends Tickable {
     }
 
     /**
+     * Resets drag and drop ship to origin place by making static ship invisible and moving pane invisible.
+     * If ship was turned by 90 degrees it will reset to 0 degrees.
+     */
+    public void stopInvisible(){
+        stop();
+        pane_static.setVisible(false);
+    }
+
+    /**
      * Rotates ship by 90 degrees.
      */
     public void rotate() {
