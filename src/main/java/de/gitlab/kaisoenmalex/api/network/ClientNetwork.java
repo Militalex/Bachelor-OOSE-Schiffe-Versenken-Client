@@ -1,17 +1,18 @@
 package de.gitlab.kaisoenmalex.api.network;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
+import de.gitlab.kaisoenmalex.api.network.packets.ActionPacket;
 import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
-import de.gitlab.kaisoenmalex.api.util.ILogger;
-import de.gitlab.kaisoenmalex.api.util.TCPUtil;
-import de.gitlab.kaisoenmalex.api.util.Tickable;
-import de.gitlab.kaisoenmalex.api.util.Tuple;
+import de.gitlab.kaisoenmalex.api.util.*;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class ClientNetwork implements ILogger, Closeable {
         this.client = client;
 
         final Tuple<Socket, Tuple<String, Integer>> gameInfos = TCPUtil.connectToServer(packet);
+        client.initialize(gameInfos.getValue().getKey(), this);
 
         this.writer = TCPUtil.getWriter(gameInfos.getKey());
         this.listener = new Listener(gameInfos.getKey());
@@ -48,7 +50,18 @@ public class ClientNetwork implements ILogger, Closeable {
      * This methods handles all server requests.
      */
     public void handleServerRequests(PrintWriter writer, BufferedReader reader){
-        //TODO: Define Reactions of client for server requests.
+        final ActionPacket packet = TCPUtil.receiveObject(reader, ActionPacket.class);
+        try {
+            if (packet.getParameters().isEmpty()){
+                Reflector.invokeStaticMethod(ActionHandler.class, packet.getMethodName(), writer);
+            }
+            else {
+                Reflector.invokeStaticMethod(ActionHandler.class, packet.getMethodName(), writer, packet.getParameters());
+            }
+        }
+        catch (InvocationTargetException | IllegalAccessException e) {
+            LOGGER.error("Cannot invoke task: " + packet.getMethodName(), e);
+        }
     }
 
     //Methods to send things to server
