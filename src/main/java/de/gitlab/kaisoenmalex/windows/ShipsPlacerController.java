@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Kai Sturm
- * @version 1.3
+ * @version 1.3.1
  * latest author: Alexander Ley
  *
  * This class handles functionality of ships placer window.
@@ -213,5 +213,12 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
      */
     public void onClickRules() {
         BattleshipClientApp.changeScene("/FXML/rules.fxml", "Regeln", 600, 400, false);
+    }
+
+    /**
+     * Loads next login scene.
+     */
+    public void onClickConfirm(){
+        BattleshipClientApp.changeScene("/FXML/login.fxml", "Anmelden", 600, 400, false);
     }
 }
