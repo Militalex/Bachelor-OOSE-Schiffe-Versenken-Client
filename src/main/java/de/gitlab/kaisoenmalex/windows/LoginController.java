@@ -1,5 +1,7 @@
 package de.gitlab.kaisoenmalex.windows;
 
+import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
+import de.gitlab.kaisoenmalex.api.network.ClientNetwork;
 import de.gitlab.kaisoenmalex.api.util.IController;
 import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
@@ -84,17 +86,16 @@ public class LoginController implements IController<LoginController>, Initializa
         final boolean isRandomEnemy = check_random.isSelected();
         final String code = txt_code.getText();
 
-        ConnectPacket connectPacket = new ConnectPacket(txt_name.getText(), isHost, isNoobVariant, isRandomEnemy, (isHost ? null : code), ShipsPlacerController.AREA);
+        final ConnectPacket connectPacket = new ConnectPacket(txt_name.getText(), isHost, isNoobVariant, isRandomEnemy, (isHost ? null : code), ShipsPlacerController.AREA);
 
         try {
-            TCPUtil.connectToServer(connectPacket);
+            BattleshipClientApp.client = new BattleshipClient(connectPacket);
         }
         catch (IOException e) {
             logger.error("Cannot connect to server", e);
             ILogger.showError("Verbindung zum Server fehlgeschlagen! Versuche es erneut!");
             return;
         }
-
 
 
         BattleshipClientApp.changeScene("/FXML/wait.fxml", "Warte - Spiel beitreten", 800, 550, false);
@@ -107,10 +108,9 @@ public class LoginController implements IController<LoginController>, Initializa
             if (!isRandomEnemy) {
                 waitController.lbl_code.setVisible(true);
             }
-        } else {
+        }
+        else {
             waitController.lbl_wait.setText("Spiel wird beigetreten");
         }
-
-
     }
 }
