@@ -34,12 +34,12 @@ public class ShipsMover extends Tickable {
     @Override
     public void tick() {
 
-        double x = MouseInfo.getPointerInfo().getLocation().getX();
-        double y = MouseInfo.getPointerInfo().getLocation().getY();
-
         pane_moving.setVisible(true);
         pane_static.setVisible(false);
         String shipName = pane_moving.getId();
+
+        double x = MouseInfo.getPointerInfo().getLocation().getX();
+        double y = MouseInfo.getPointerInfo().getLocation().getY();
 
         double winLocX = BattleshipClientApp.stage.getX();
         double winLocY = BattleshipClientApp.stage.getY();
