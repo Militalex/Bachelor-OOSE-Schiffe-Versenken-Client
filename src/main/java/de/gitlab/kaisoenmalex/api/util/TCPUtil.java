@@ -13,8 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.Socket;
+import java.net.*;
 import java.util.Objects;
 
 /**
@@ -32,7 +31,7 @@ public class TCPUtil implements ILogger{
 
     /**
      * Requests the server the first time to connect.
-     * @return Returns the port to connect via tcp.
+     * @return Returns the port to connect via tcp and sever generated code.
      * @throws IOException if the request could not be executed due to cancellation, a connectivity problem or timeout.
      */
     public static Tuple<String, Integer> requestConnection(ConnectPacket packet) throws IOException {
@@ -46,6 +45,7 @@ public class TCPUtil implements ILogger{
 
         String obj = Objects.requireNonNull(client.newCall(request).execute().body()).string();
 
+        //String code, Integer port
         return gson.fromJson(obj, new TypeToken<Tuple<String, Integer>>(){}.getType());
     }
 
@@ -55,8 +55,10 @@ public class TCPUtil implements ILogger{
      * @throws IOException when the request could not be executed due to cancellation, a connectivity problem or timeout.
      */
     public static Tuple<Socket, Tuple<String, Integer>> connectToServer(InetAddress host, ConnectPacket packet) throws IOException {
+        //String code, Integer port
         final Tuple<String, Integer> gameInfo = requestConnection(packet);
 
+        //Socket, String code, Integer port
         return new Tuple<>(new Socket(host, gameInfo.getValue()), gameInfo);
     }
 
@@ -65,8 +67,10 @@ public class TCPUtil implements ILogger{
      * @throws IOException when the request could not be executed due to cancellation, a connectivity problem or timeout.
      */
     public static Tuple<Socket, Tuple<String, Integer>> connectToServer(ConnectPacket packet) throws IOException {
+        //String code, Integer port
         final Tuple<String, Integer> gameInfo = requestConnection(packet);
 
+        //Socket, String code, Integer port
         return new Tuple<>(new Socket(HOST_ADDRESS, gameInfo.getValue()), gameInfo);
     }
 
@@ -93,6 +97,7 @@ public class TCPUtil implements ILogger{
      */
     public static <T> void sendObject(PrintWriter writer, T obj){
         final String json = gson.toJson(obj, new TypeToken<T>(){}.getType());
+        System.out.println(json);
         writer.println(json);
     }
 
@@ -110,8 +115,15 @@ public class TCPUtil implements ILogger{
                 throw new IllegalStateException("BufferedReader is not readable.");
             }
 
-            final String json = reader.readLine();
-            return gson.fromJson(json, clazz);
+            StringBuilder json = new StringBuilder();
+
+            while (reader.ready()){
+                json.append(reader.readLine());
+            }
+
+            // String json = reader.readLine();
+            System.out.println(json);
+            return gson.fromJson(json.toString(), clazz);
         }
         catch (JsonParseException e){
             STATIC_LOGGER.warn("Cannot get Object from json.", e);
@@ -137,7 +149,6 @@ public class TCPUtil implements ILogger{
                 STATIC_LOGGER.warn("BufferedReader is not readable.");
                 throw new IllegalStateException("BufferedReader is not readable.");
             }
-
             final String json = reader.readLine();
             return gson.fromJson(json, typeToken.getType());
         }
@@ -149,5 +160,52 @@ public class TCPUtil implements ILogger{
             STATIC_LOGGER.error("An I/O error occurs.", e);
             throw new IllegalStateException("BufferedReader is not readable.", e);
         }
+    }
+
+    public static <T> T receiveObject(String json, Class<T> clazz){
+        try {
+            System.out.println(json);
+            return gson.fromJson(json, clazz);
+        }
+        catch (JsonParseException e){
+            STATIC_LOGGER.warn("Cannot get Object from json.", e);
+            throw e;
+        }
+    }
+
+    public static <T> T receiveObject(String json, TypeToken<T> typeToken){
+        try {
+            System.out.println(json);
+            return gson.fromJson(json, typeToken.getType());
+        }
+        catch (JsonParseException e){
+            STATIC_LOGGER.warn("Cannot get Object from json.", e);
+            throw e;
+        }
+    }
+
+    public static boolean isSocketAlive(int port) {
+        boolean isAlive = false;
+
+        // Creates a socket address from a hostname and a port number
+        SocketAddress socketAddress = new InetSocketAddress(HOST_ADDRESS, port);
+        Socket socket = new Socket();
+
+        // Timeout required - it's in milliseconds
+        int timeout = 2000;
+
+        try {
+            socket.connect(socketAddress, timeout);
+            socket.close();
+            isAlive = true;
+        }
+        catch (SocketTimeoutException exception) {
+            System.out.println("SocketTimeoutException " + HOST_ADDRESS + ":" + port + ". " + exception.getMessage());
+        }
+        catch (IOException exception) {
+            System.out.println(
+                    "IOException - Unable to connect to " + HOST_ADDRESS + ":" + port + ". " + exception.getMessage());
+        }
+        return isAlive;
     }
 }

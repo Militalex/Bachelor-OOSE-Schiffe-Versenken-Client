@@ -1,7 +1,5 @@
 package de.gitlab.kaisoenmalex.api.network;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
 import de.gitlab.kaisoenmalex.api.network.packets.ActionPacket;
 import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
@@ -26,6 +24,7 @@ public class ClientNetwork implements ILogger, Closeable {
 
     private final Logger LOGGER = getLogger();
 
+    private final int port;
     private final BattleshipClient client;
     private final Listener listener;
 
@@ -41,6 +40,7 @@ public class ClientNetwork implements ILogger, Closeable {
         final Tuple<Socket, Tuple<String, Integer>> gameInfos = TCPUtil.connectToServer(packet);
         client.initialize(gameInfos.getValue().getKey(), this);
 
+        this.port = gameInfos.getValue().getValue();
         this.writer = TCPUtil.getWriter(gameInfos.getKey());
         this.listener = new Listener(gameInfos.getKey());
     }
@@ -49,14 +49,15 @@ public class ClientNetwork implements ILogger, Closeable {
     /**
      * This methods handles all server requests.
      */
-    public void handleServerRequests(PrintWriter writer, BufferedReader reader){
+    public void handleServerRequests(PrintWriter writer, BufferedReader reader) throws IOException {
         final ActionPacket packet = TCPUtil.receiveObject(reader, ActionPacket.class);
+
         try {
             if (packet.getParameters().isEmpty()){
-                Reflector.invokeStaticMethod(ActionHandler.class, packet.getMethodName(), writer);
+                Reflector.invokeStaticMethod(ActionHandler.class, packet.getMethodName(), this.writer);
             }
             else {
-                Reflector.invokeStaticMethod(ActionHandler.class, packet.getMethodName(), writer, packet.getParameters());
+                Reflector.invokeStaticMethod(ActionHandler.class, packet.getMethodName(), this.writer, packet.getParameters());
             }
         }
         catch (InvocationTargetException | IllegalAccessException e) {
@@ -99,7 +100,7 @@ public class ClientNetwork implements ILogger, Closeable {
          */
         public Listener(Socket socket) {
             this.socket = socket;
-            start(2000, 5000);
+            start(2000, 2500);
         }
 
         /**
