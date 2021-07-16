@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Kai Sturm
- * @version 1.3.1
+ * @version 1.3.2
  * latest author: Alexander Ley
  *
  * This class handles functionality of ships placer window.
@@ -111,6 +111,18 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
         paneDadMap.put(pane_2_2ship, pane_2ship_dad);
         paneDadMap.put(pane_2_3ship, pane_2ship_dad);
         paneDadMap.put(pane_2_4ship, pane_2ship_dad);
+
+        AREA.placeShip(0, 0, 5, true);
+        AREA.placeShip(2, 0, 4, true);
+        AREA.placeShip(4, 0, 4, true);
+        AREA.placeShip(6, 0, 3, true);
+        AREA.placeShip(8, 0, 3, true);
+        AREA.placeShip(0, 8, 2, true);
+        AREA.placeShip(2, 8, 2, true);
+        AREA.placeShip(4, 8, 2, true);
+        AREA.placeShip(6, 8, 2, true);
+
+        paneDadMap.keySet().forEach(pane -> pane.setVisible(false));
 
         renderArea();
     }
