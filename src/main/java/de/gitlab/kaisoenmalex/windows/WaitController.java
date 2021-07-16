@@ -1,9 +1,9 @@
 package de.gitlab.kaisoenmalex.windows;
 
-import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
 import de.gitlab.kaisoenmalex.api.util.IController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -33,5 +33,9 @@ public class WaitController implements IController<WaitController>, Initializabl
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void onClickQuit(){
+        BattleshipClientApp.changeScene("/FXML/menu.fxml", "Schiffe Versenken", 600, 400, false);
     }
 }
