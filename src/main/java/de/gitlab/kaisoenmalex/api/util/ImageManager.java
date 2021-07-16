@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import java.util.List;
  * This class can manage an amount (Menge) of images and there rotations.
  * All images were merged together (with individual rotation) to create one image.
  */
-public class ImageManager {
+public class ImageManager implements Serializable {
 
     /**
      * A Hashmap containing all Images from textures folder. The Hashmap maps filename (with .png) and the corresponding Image.
