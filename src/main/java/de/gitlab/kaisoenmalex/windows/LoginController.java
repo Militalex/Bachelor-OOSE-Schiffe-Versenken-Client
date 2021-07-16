@@ -1,11 +1,10 @@
 package de.gitlab.kaisoenmalex.windows;
 
 import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
-import de.gitlab.kaisoenmalex.api.network.ClientNetwork;
-import de.gitlab.kaisoenmalex.api.util.IController;
+import de.gitlab.kaisoenmalex.api.game.Field;
 import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
+import de.gitlab.kaisoenmalex.api.util.IController;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
-import de.gitlab.kaisoenmalex.api.util.TCPUtil;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,8 +17,8 @@ import java.util.ResourceBundle;
 
 /**
  * @author Sidar Sönmez
- * @version 1.2
- * last Author: Sidar Sönmez
+ * @version 1.3
+ * last Author: Alexander Ley
  *
  * This class handles functionality of the login window.
  */
@@ -86,6 +85,8 @@ public class LoginController implements IController<LoginController>, Initializa
         final boolean isRandomEnemy = check_random.isSelected();
         final String code = txt_code.getText();
 
+        ShipsPlacerController.AREA.forEach(Field::unmarkField);
+
         final ConnectPacket connectPacket = new ConnectPacket(txt_name.getText(), isHost, isNoobVariant, isRandomEnemy, (isHost ? null : code), ShipsPlacerController.AREA);
 
         try {
@@ -97,15 +98,14 @@ public class LoginController implements IController<LoginController>, Initializa
             return;
         }
 
+        BattleshipClientApp.changeScene("/FXML/wait.fxml", "Spiel wird vorbereitet ...", 600, 400, false);
 
-        BattleshipClientApp.changeScene("/FXML/wait.fxml", "Warte - Spiel beitreten", 800, 550, false);
+        final WaitController waitController = (WaitController) BattleshipClientApp.activeController.getInstance();
 
-        WaitController waitController = (WaitController) BattleshipClientApp.activeController.getInstance();
-
-        waitController.lbl_code.setVisible(false);
         if (isHost) {
             waitController.lbl_wait.setText("Warte auf Gegner");
             if (!isRandomEnemy) {
+                waitController.lbl_code.setText(BattleshipClientApp.client.getCode());
                 waitController.lbl_code.setVisible(true);
             }
         }
