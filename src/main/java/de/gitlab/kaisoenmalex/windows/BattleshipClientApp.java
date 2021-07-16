@@ -4,6 +4,7 @@ import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
 import de.gitlab.kaisoenmalex.api.util.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -16,7 +17,7 @@ import java.util.zip.ZipInputStream;
 
 /**
  * @author Alexander Ley
- * @version 1.3
+ * @version 1.4
  * latest author: Alexander Ley
  *
  * This Class is the entry Point into the Application.
@@ -33,7 +34,7 @@ public class BattleshipClientApp extends Application implements ILogger {
     public static IController<?> activeController;
     public static Stage stage;
 
-    public static BattleshipClient client;
+    public static @Nullable BattleshipClient client;
 
     /**
      * Loads all Images and shows the first scene.
@@ -54,6 +55,11 @@ public class BattleshipClientApp extends Application implements ILogger {
 
     @Override
     public void stop() {
+        if (client != null){
+            client.close();
+        }
+
+        //Close Closeable Controller
         if (activeController instanceof Closeable){
             try {
                 ((Closeable) activeController).close();
@@ -63,10 +69,11 @@ public class BattleshipClientApp extends Application implements ILogger {
             }
         }
 
+        //Clear ImageMap
         ImageManager.IMAGE_MAP.clear();
-
         System.gc();
 
+        //Delete tmpFolder (jar file only)
         if (tmpFolder != null){
             try {
                 deleteDirectory(tmpFolder);
