@@ -5,13 +5,15 @@ import de.gitlab.kaisoenmalex.api.util.ImageManager;
 import de.gitlab.kaisoenmalex.api.util.Rotation;
 import javafx.scene.image.Image;
 
+import java.io.Serializable;
+
 /**
  * @author Alexander Ley
  * @version 1.2
  *
  * This class represents one field in GameArea and manage all field properties including textures.
  */
-public class Field implements ILogger {
+public class Field implements ILogger, Serializable {
 
     private final int xCord, yCord;
     private boolean isShoot;
