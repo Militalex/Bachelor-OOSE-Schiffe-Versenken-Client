@@ -12,8 +12,8 @@ import java.util.ResourceBundle;
 
 /**
  * @author Sidar Sönmez
- * @version 1.0
- * last Author: Sidar Sönmez
+ * @version 1.1
+ * last Author: Alexander Ley & Kai Sturm
  *
  * This class handles functionality of the wait window.
  */
@@ -21,7 +21,8 @@ import java.util.ResourceBundle;
 public class WaitController implements IController<WaitController>, Initializable {
 
     @FXML Label lbl_wait;
-    @FXML Label lbl_code;
+    @FXML TextField lbl_code;
+    @FXML Button btn_quit;
 
 
     @Override
