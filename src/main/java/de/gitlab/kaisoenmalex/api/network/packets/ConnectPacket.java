@@ -2,13 +2,15 @@ package de.gitlab.kaisoenmalex.api.network.packets;
 
 import de.gitlab.kaisoenmalex.api.game.GameArea;
 
+import java.io.Serializable;
+
 /**
  * @author Alexander Ley
  * @version 1.0
  *
  * This class stores data which is send to server by client to connect the first time.
  */
-public class ConnectPacket {
+public class ConnectPacket implements Serializable {
     private final String name;
     private final boolean isHost;
     private final boolean noobVariant;
