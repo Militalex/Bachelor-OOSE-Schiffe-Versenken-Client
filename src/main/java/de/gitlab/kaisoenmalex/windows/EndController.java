@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ResultController implements IController<ResultController>, Initializable, ILogger {
+public class EndController implements IController<EndController>, Initializable, ILogger {
 
     @FXML private Label lbl_result;
     @FXML private Label lbl_surrender;
@@ -19,7 +19,7 @@ public class ResultController implements IController<ResultController>, Initiali
 
 
     @Override
-    public ResultController getInstance() {
+    public EndController getInstance() {
         return this;
     }
 
