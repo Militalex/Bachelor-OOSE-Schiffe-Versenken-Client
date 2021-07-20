@@ -94,7 +94,7 @@ public class ClientNetwork implements ILogger, Closeable {
         return TCPUtil.gson.fromJson(obj, GameStatusPacket.class);
     }
 
-    public <T> void sendObject(T obj) {
+    public void sendPacket(ActionPacket obj) {
         TCPUtil.sendObject(listener.getObjectWriter(), obj);
     }
 

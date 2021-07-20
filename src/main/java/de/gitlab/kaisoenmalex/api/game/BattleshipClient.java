@@ -31,7 +31,7 @@ public class BattleshipClient implements Closeable {
         this.network = new ClientNetwork(this, packet);
 
         final ActionPacket actionPacket = new ActionPacket("setReady", Collections.emptyList());
-        network.sendObject(actionPacket);
+        network.sendPacket(actionPacket);
     }
 
     public void initialize(String code, ClientNetwork network){
