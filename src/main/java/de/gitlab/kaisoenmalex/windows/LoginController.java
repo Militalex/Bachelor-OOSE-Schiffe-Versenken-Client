@@ -1,8 +1,8 @@
 package de.gitlab.kaisoenmalex.windows;
 
 import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
-import de.gitlab.kaisoenmalex.api.game.Field;
 import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
+import de.gitlab.kaisoenmalex.api.util.CodeInvalidException;
 import de.gitlab.kaisoenmalex.api.util.IController;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
 import javafx.collections.FXCollections;
@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Sidar Sönmez
- * @version 1.3
+ * @version 1.4
  * last Author: Alexander Ley
  *
  * This class handles functionality of the login window.
@@ -92,8 +92,13 @@ public class LoginController implements IController<LoginController>, Initializa
         try {
             BattleshipClientApp.client = new BattleshipClient(connectPacket);
         }
+        catch (CodeInvalidException e){
+            logger.warn("Cannot connect to server. " + e);
+            ILogger.showError("Code ist ung\u00fcltig!");
+            return;
+        }
         catch (IOException e) {
-            logger.error("Cannot connect to server", e);
+            logger.warn("Cannot connect to server", e);
             ILogger.showError("Verbindung zum Server fehlgeschlagen! Versuche es erneut!");
             return;
         }
