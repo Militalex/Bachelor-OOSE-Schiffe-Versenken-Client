@@ -74,6 +74,26 @@ public class ClientNetwork implements ILogger, Closeable {
     }
 
     /**
+     * @return Returns true if successful and false if not.
+     * @throws IOException if the request could not be executed due to cancellation, a connectivity problem or timeout.
+     * Because networks can fail during an exchange,
+     * it is possible that the remote server accepted the request before the failure.
+     */
+    public boolean abortWaiting() throws IOException {
+        final String code = client.getCode();
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(TCPUtil.SERVER_ADDRESS + "waitingAbort")
+                .post(RequestBody.create(code, MediaType.parse("application/txt; charset=utf-8")))
+                .build();
+
+        this.client.close();
+
+        return Boolean.parseBoolean(Objects.requireNonNull(client.newCall(request).execute().body()).string());
+    }
+
+    /**
      * Sends server a post Request to get gameStatus from server.
      * @throws IOException if the request could not be executed due to cancellation, a connectivity problem or timeout.
      * Because networks can fail during an exchange,
