@@ -5,10 +5,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import de.gitlab.kaisoenmalex.api.network.packets.ActionPacket;
 import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
+import okhttp3.*;
 
 import java.io.*;
 import java.net.*;
@@ -16,7 +13,7 @@ import java.util.Objects;
 
 /**
  * @author Alexander Ley
- * @version 1.3
+ * @version 1.3.5
  *
  * This class offers tcp methods.
  */
@@ -41,7 +38,10 @@ public class TCPUtil implements ILogger{
                 .post(RequestBody.create(json, MediaType.parse("application/json; charset=utf-8")))
                 .build();
 
-        String obj = Objects.requireNonNull(client.newCall(request).execute().body()).string();
+        Response response;
+        String obj = Objects.requireNonNull((response = client.newCall(request).execute()).body()).string();
+
+        if (response.code() == 404) throw new CodeInvalidException("Code: " + packet.getCode() + " is not suitable.");
 
         //String code, Integer port
         return gson.fromJson(obj, new TypeToken<Tuple<String, Integer>>(){}.getType());
@@ -110,7 +110,7 @@ public class TCPUtil implements ILogger{
      * which is left in an indeterminate state.
      */
     public static <T> boolean sendObject(ObjectOutputStream stream, T obj) {
-        System.out.println("Send: " + (((obj instanceof ActionPacket)) ? ((ActionPacket) obj).getMethodName() + ": ": "") + obj);
+        ILogger.STATIC_LOGGER.info("Send: " + (((obj instanceof ActionPacket)) ? ((ActionPacket) obj).getMethodName() + ": ": "") + obj);
 
         try {
             stream.writeObject(obj);
@@ -134,7 +134,7 @@ public class TCPUtil implements ILogger{
 
     public static Object receiveObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
         final Object obj = stream.readObject();
-        System.out.println("Received: " + (((obj instanceof ActionPacket)) ? ((ActionPacket) obj).getMethodName() + ": ": "") + obj);
+        ILogger.STATIC_LOGGER.info("Received: " + (((obj instanceof ActionPacket)) ? ((ActionPacket) obj).getMethodName() + ": ": "") + obj);
         return obj;
     }
 
