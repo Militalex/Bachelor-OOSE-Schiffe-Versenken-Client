@@ -3,8 +3,10 @@ package de.gitlab.kaisoenmalex.api.game;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Consumer;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author Alexander Ley
@@ -41,6 +43,16 @@ public class GameArea implements Serializable {
     public void setField(Field field, int x, int y){
         if (x < 0 || x >= 10 || y < 0 || y >= 10) throw new IllegalArgumentException("Coordinates: (" + x + ", " + y + ") are illegal.");
         area[x][y] = field;
+    }
+
+    public boolean haveShip(){
+        for (int x = 0; x < area.length; x++){
+            for (int y = 0; y < area[x].length; y++){
+                if (getField(x, y).isShip()) return true;
+            }
+        }
+
+        return false;
     }
 
     /**
