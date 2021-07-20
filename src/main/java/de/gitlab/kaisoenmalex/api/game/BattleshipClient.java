@@ -3,6 +3,7 @@ package de.gitlab.kaisoenmalex.api.game;
 import de.gitlab.kaisoenmalex.api.network.ClientNetwork;
 import de.gitlab.kaisoenmalex.api.network.packets.ActionPacket;
 import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
+import de.gitlab.kaisoenmalex.windows.BattleshipClientApp;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Closeable;
@@ -109,5 +110,6 @@ public class BattleshipClient implements Closeable {
     @Override
     public void close() {
         network.close();
+        BattleshipClientApp.client = null;
     }
 }
