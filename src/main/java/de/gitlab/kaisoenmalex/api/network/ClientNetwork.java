@@ -22,7 +22,7 @@ import java.util.Objects;
 
 /**
  * @author Alexander Ley
- * @version 1.2
+ * @version 1.3
  *
  * This Class helps to communicate with Server. It can send things to server and handle server requests.
  */
@@ -109,7 +109,6 @@ public class ClientNetwork implements ILogger, Closeable {
                 .build();
 
         String obj = Objects.requireNonNull(client.newCall(request).execute().body()).string();
-        System.out.println(obj);
 
         return TCPUtil.gson.fromJson(obj, GameStatusPacket.class);
     }
@@ -172,7 +171,7 @@ public class ClientNetwork implements ILogger, Closeable {
                 catch (Exception ignored) { }
             }
             catch (IOException e) {
-                LOGGER.error("I/O Error occurs when waiting for a connection. Listener will be closed.", e);
+                LOGGER.warn("I/O Error occurs when waiting for a connection. Listener will be closed.");
                 close();
             }
         }
@@ -187,23 +186,17 @@ public class ClientNetwork implements ILogger, Closeable {
             try {
                 objectWriter.close();
             }
-            catch (IOException e) {
-                LOGGER.warn("An I/O error occurs when closing the ObjectInputStream.", e);
-            }
+            catch (Exception ignored) { }
 
             try {
                 objectReader.close();
             }
-            catch (IOException e) {
-                LOGGER.warn("An I/O error occurs when closing the ObjectInputStream.", e);
-            }
+            catch (Exception ignored) { }
 
             try {
                 socket.close();
             }
-            catch (IOException e) {
-                LOGGER.warn("An I/O error occurs when closing the socket.", e);
-            }
+            catch (Exception ignored) { }
         }
     }
 }
