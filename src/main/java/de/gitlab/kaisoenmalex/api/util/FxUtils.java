@@ -9,9 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
+
 /**
  * @author Alexander Ley
- * @version 1.1
+ * @version 1.2
  *
  * This class offers help methods for JavaFx things.
  */
@@ -50,6 +52,26 @@ public class FxUtils implements ILogger{
             }
             return null;
         }
+    }
+
+    /**
+     * @param parent Parent Node, if null stage were used.
+     * @param unity is used to define a custom mesh.
+     * @param xOffset offset in positive x
+     * @param yOffset offset in positive y
+     * @return Returns an cord over a special node. (0 ,0) starts at top left corner of the node.
+     */
+    public static Tuple<Integer, Integer> getMouseCordOverNode(@Nullable Node parent, int unity, int xOffset, int yOffset){
+        final double x = MouseInfo.getPointerInfo().getLocation().getX();
+        final double y = MouseInfo.getPointerInfo().getLocation().getY();
+
+        final double winLocX = BattleshipClientApp.stage.getX();
+        final double winLocY = BattleshipClientApp.stage.getY();
+
+        final int mouseX = (int) ((x - winLocX - ((parent != null) ? parent.getTranslateX() : 0)) / unity) + xOffset;
+        final int mouseY = (int) ((y - winLocY - ((parent != null) ? parent.getTranslateY() : 0)) / unity) + yOffset;
+
+        return new HomogenTuple<>(mouseX, mouseY);
     }
 
     /**
