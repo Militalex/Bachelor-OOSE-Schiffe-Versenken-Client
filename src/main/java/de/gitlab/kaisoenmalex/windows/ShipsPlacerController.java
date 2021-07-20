@@ -25,8 +25,6 @@ import java.util.ResourceBundle;
  */
 public class ShipsPlacerController implements IController<ShipsPlacerController>, ILogger, Initializable, Closeable {
 
-    public static final GameArea AREA = new GameArea();
-
     @FXML private GridPane gridPane;
     @FXML private Button btn_clear;
     @FXML private Button btn_rules;
@@ -51,6 +49,8 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
     @FXML private Pane pane_2_4ship;
     @FXML private Pane pane_2ship_dad;
 
+    public static final GameArea AREA = new GameArea();
+
     /**
      * Maps normal ship-panes to dummy moving ship.
      */
@@ -71,6 +71,22 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        paneDadMap.put(pane_5ship, pane_5ship_dad);
+        paneDadMap.put(pane_4_1ship, pane_4ship_dad);
+        paneDadMap.put(pane_4_2ship, pane_4ship_dad);
+        paneDadMap.put(pane_3_1ship, pane_3ship_dad);
+        paneDadMap.put(pane_3_2ship, pane_3ship_dad);
+        paneDadMap.put(pane_3_3ship, pane_3ship_dad);
+        paneDadMap.put(pane_2_1ship, pane_2ship_dad);
+        paneDadMap.put(pane_2_2ship, pane_2ship_dad);
+        paneDadMap.put(pane_2_3ship, pane_2ship_dad);
+        paneDadMap.put(pane_2_4ship, pane_2ship_dad);
+
+        if (AREA.haveShip()){
+            AREA.addNeededMarks();
+            paneDadMap.keySet().forEach(pane -> pane.setVisible(false));
+        }
+
         btn_accept.setDisable(true);
 
         for (int x = 0; x < 10; x++){
@@ -101,18 +117,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
             }
         }
 
-        paneDadMap.put(pane_5ship, pane_5ship_dad);
-        paneDadMap.put(pane_4_1ship, pane_4ship_dad);
-        paneDadMap.put(pane_4_2ship, pane_4ship_dad);
-        paneDadMap.put(pane_3_1ship, pane_3ship_dad);
-        paneDadMap.put(pane_3_2ship, pane_3ship_dad);
-        paneDadMap.put(pane_3_3ship, pane_3ship_dad);
-        paneDadMap.put(pane_2_1ship, pane_2ship_dad);
-        paneDadMap.put(pane_2_2ship, pane_2ship_dad);
-        paneDadMap.put(pane_2_3ship, pane_2ship_dad);
-        paneDadMap.put(pane_2_4ship, pane_2ship_dad);
-
-        AREA.placeShip(0, 0, 5, true);
+        /*AREA.placeShip(0, 0, 5, true);
         AREA.placeShip(2, 0, 4, true);
         AREA.placeShip(4, 0, 4, true);
         AREA.placeShip(6, 0, 3, true);
@@ -122,7 +127,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
         AREA.placeShip(4, 8, 2, true);
         AREA.placeShip(6, 8, 2, true);
 
-        paneDadMap.keySet().forEach(pane -> pane.setVisible(false));
+        paneDadMap.keySet().forEach(pane -> pane.setVisible(false));*/
 
         renderArea();
     }
@@ -130,7 +135,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
     @Override
     public void close() {
         if (shipsMover != null) {
-            shipsMover.stop();
+            shipsMover.forceStop();
             shipsMover = null;
         }
     }
@@ -175,22 +180,14 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
      */
     public void onClickDadShip(MouseEvent event) {
         if (event.getButton() == MouseButton.SECONDARY){
-            shipsMover.stop();
+            shipsMover.forceStop();
             shipsMover = null;
             renderArea();
         }
         if (event.getButton() == MouseButton.PRIMARY) {
-            double x = MouseInfo.getPointerInfo().getLocation().getX();
-            double y = MouseInfo.getPointerInfo().getLocation().getY();
-
-            double winLocX = BattleshipClientApp.stage.getX();
-            double winLocY = BattleshipClientApp.stage.getY();
-
-            double gridPaneX = gridPane.getTranslateX();
-            double gridPaneY = gridPane.getTranslateY();
-
-            int mouseX = (int) ((x - winLocX - gridPaneX) / 39) - 1;
-            int mouseY = (int) ((y - winLocY - gridPaneY) / 39) - 3;
+            final Tuple<Integer, Integer> cord = FxUtils.getMouseCordOverNode(gridPane, 39, -1, -3);
+            final int mouseX = cord.getKey();
+            final int mouseY = cord.getValue();
 
             if ((mouseX >= 0 && mouseX < 10) && (mouseY >= 0 && mouseY < 10)) {
                 if (AREA.placeShip(mouseX, mouseY, shipsMover.getShipLength(), shipsMover.isVertical())) {
@@ -200,7 +197,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
                 }
             }
             else{
-                shipsMover.stop();
+                shipsMover.forceStop();
                 shipsMover = null;
                 renderArea();
             }
