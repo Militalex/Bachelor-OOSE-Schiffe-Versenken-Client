@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 /**
  * @author Alexander Ley
- * @version 1.3
+ * @version 1.4
  *
  * This class controls gameArea and offers Methods to place ships, shoot and other cool staff.
  */
@@ -207,17 +207,31 @@ public class GameArea implements Serializable {
         return field.shoot();
     }
 
+    public void addNeededMarks(){
+        stream().forEach(field -> {
+            if (field.isShip()) markAround(field.getXCord(), field.getYCord());
+        });
+    }
+
+    public void removeAllMarks(){
+        stream().forEach(Field::unmarkField);
+    }
+
     /**
      * Clears area by removing all ships and marks.
      */
     public void clear(){
-        Arrays.stream(area).forEach(fields ->
-                Arrays.stream(fields).forEach(Field::clear));
+        stream().forEach(Field::clear);
     }
 
-    public void forEach(Consumer<Field> consumer){
-        Arrays.stream(area).forEach(fields ->
-                Arrays.stream(fields).forEach(consumer));
+    public Stream<Field> stream(){
+        final List<Field> list = new ArrayList<>();
+
+        for (Field[] fields : area){
+            list.addAll(Arrays.asList(fields));
+        }
+
+        return list.stream();
     }
 
     /**

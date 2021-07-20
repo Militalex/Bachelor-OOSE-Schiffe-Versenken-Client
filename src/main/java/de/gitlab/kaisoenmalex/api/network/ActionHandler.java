@@ -61,7 +61,7 @@ public class ActionHandler implements ILogger{
         if (!status.isNoob()){
             final GameArea area = new GameArea();
 
-            enemyArea.forEach(field -> {
+            enemyArea.stream().forEach(field -> {
                 final Field newField = new Field(field.getXCord(), field.getYCord());
 
                 if (field.isShip()) field.setShip(Field.ShipPart.MIDDLE);

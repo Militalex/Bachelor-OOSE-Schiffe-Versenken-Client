@@ -85,7 +85,7 @@ public class LoginController implements IController<LoginController>, Initializa
         final boolean isRandomEnemy = check_random.isSelected();
         final String code = txt_code.getText();
 
-        ShipsPlacerController.AREA.forEach(Field::unmarkField);
+        ShipsPlacerController.AREA.removeAllMarks();
 
         final ConnectPacket connectPacket = new ConnectPacket(txt_name.getText(), isHost, isNoobVariant, isRandomEnemy, (isHost ? null : code), ShipsPlacerController.AREA);
 
