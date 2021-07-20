@@ -17,7 +17,7 @@ import java.io.ObjectOutputStream;
 
 /**
  * @author Alexander Ley
- * @version 1.3
+ * @version 1.3.1
  *
  * This class defines all client reactions.
  * Note every Method have (ObjectOutputStream writer, Object... parameters) Parameters.
@@ -28,8 +28,6 @@ public class ActionHandler implements ILogger{
      * Starts game.
      */
     private static void startGame(ObjectOutputStream writer, Boolean isHost) {
-        System.out.println("Start Game");
-
         final BattleshipClient client = BattleshipClientApp.client;
         assert client != null;
 
@@ -52,7 +50,6 @@ public class ActionHandler implements ILogger{
      * This method processes GameStatusPacket and refreshes the actual local game Status.
      */
     private static void receiveStatus(ObjectOutputStream writer, GameStatusPacket status){
-        System.out.println("Receive Status");
         final BattleshipClient client = BattleshipClientApp.client;
         assert client != null;
 
