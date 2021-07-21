@@ -12,7 +12,7 @@ import java.util.Collections;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.0.1
  *
  * This class handles all client functionalities.
  */
@@ -98,13 +98,8 @@ public class BattleshipClient implements Closeable {
         this.canAttack = canAttack;
     }
 
-    public void shootField(int x, int y){
-        Boolean answer = ownArea.shootField(x, y);
-
-        if (answer == null){
-            //TODO: Show in controller that field is not shoot-able.
-        }
-        //TODO: renderArea Method in controller.
+    public Boolean shootField(int x, int y){
+        return enemyArea.shootField(x, y);
     }
 
     @Override
