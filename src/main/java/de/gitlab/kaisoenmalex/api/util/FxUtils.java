@@ -5,7 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,7 +14,7 @@ import java.awt.*;
 
 /**
  * @author Alexander Ley
- * @version 1.2
+ * @version 1.2.5
  *
  * This class offers help methods for JavaFx things.
  */
@@ -52,6 +53,26 @@ public class FxUtils implements ILogger{
             }
             return null;
         }
+    }
+
+    /**
+     * Sets background image of node.
+     * Width and Height of image is same as size of node.
+     */
+    public static void setBackgroundImage(Region node, Image image){
+        setBackgroundImage(node, image, node.getWidth(), node.getHeight());
+    }
+
+    /**
+     * Sets background image of node.
+     * @param width width of image.
+     * @param height height of image.
+     */
+    public static void setBackgroundImage(Region node, Image image, double width, double height){
+        node.setBackground(new Background(
+                new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                        new BackgroundSize(width, height, false, false, false, false)))
+        );
     }
 
     /**
