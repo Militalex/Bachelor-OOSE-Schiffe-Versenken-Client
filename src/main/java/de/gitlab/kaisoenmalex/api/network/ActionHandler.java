@@ -17,7 +17,7 @@ import java.io.ObjectOutputStream;
 
 /**
  * @author Alexander Ley
- * @version 1.3.2
+ * @version 1.3.3
  *
  * This class defines all client reactions.
  * Note every Method have (ObjectOutputStream writer, Object... parameters) Parameters.
@@ -70,7 +70,7 @@ public class ActionHandler implements ILogger{
 
         client.receiveStatus(status.isNoob(), status.getOwnArea(), enemyArea, status.canAttack());
 
-        ((GameController) BattleshipClientApp.activeController.getInstance()).renderArea(status);
+        ((GameController) BattleshipClientApp.activeController.getInstance()).renderWindow(status);
     }
 
     /**

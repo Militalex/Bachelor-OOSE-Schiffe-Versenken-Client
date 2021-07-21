@@ -1,10 +1,13 @@
 package de.gitlab.kaisoenmalex.windows;
 
 import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
+import de.gitlab.kaisoenmalex.api.game.Field;
+import de.gitlab.kaisoenmalex.api.network.packets.ActionPacket;
 import de.gitlab.kaisoenmalex.api.network.packets.GameStatusPacket;
 import de.gitlab.kaisoenmalex.api.util.FxUtils;
 import de.gitlab.kaisoenmalex.api.util.IController;
 import de.gitlab.kaisoenmalex.api.util.ImageManager;
+import de.gitlab.kaisoenmalex.api.util.Tuple;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,7 +24,8 @@ import java.util.ResourceBundle;
 
 /**
  * @author Kai Sturm
- * @version 1.0
+ * @version 1.2
+ * last Editor: Alexander Ley
  *
  * This class handles functionality of game window.
  */
@@ -69,14 +73,14 @@ public class GameController implements IController<GameController>, Initializabl
                 grid_enemy.add(paneEnemy, x, y);
             }
         }
-        renderArea(null);
+        renderWindow(null);
     }
 
     /**
      * Render Area based on given information.
      * @param status If status is null all labels are invisible.
      */
-    public void renderArea(@Nullable GameStatusPacket status){
+    public void renderWindow(@Nullable GameStatusPacket status){
         if (status == null){
             lbl_enemyName.setVisible(false);
             lbl_ownName.setVisible(false);
@@ -103,30 +107,28 @@ public class GameController implements IController<GameController>, Initializabl
 
             lbl_actualPlayer.setText(attacker);
 
-            for (int x = 0; x < 10; x++){
-                for (int y = 0; y < 10; y++) {
-                    Image imageEnemyArea = status.getEnemyArea().getField(y, x).getImage();
-                    Image imageOwnArea = status.getOwnArea().getField(y, x).getImage();
-                    Pane paneEnemyArea = (Pane) FxUtils.getNodeFromGridPane(grid_enemy, x, y,10);
-                    Pane paneOwnArea = (Pane) FxUtils.getNodeFromGridPane(grid_own, x, y,10);
+            renderArea();
+        }
+    }
 
-                    paneOwnArea.setBackground(new Background(
-                            new BackgroundImage(imageOwnArea, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                                    new BackgroundSize(30, 30, false, false, false, false)))
-                    );
+    public void renderArea(){
+        for (int x = 0; x < 10; x++){
+            for (int y = 0; y < 10; y++) {
+                assert client != null;
 
-                    if (status.getEnemyArea().getField(y, x).shoot()) {
-                        paneEnemyArea.setBackground(new Background(
-                                new BackgroundImage(imageEnemyArea, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                                        new BackgroundSize(30, 30, false, false, false, false)))
-                        );
-                    }
-                    else {
-                        paneEnemyArea.setBackground(new Background(
-                                new BackgroundImage(ImageManager.IMAGE_MAP.get("water.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                                        new BackgroundSize(30, 30, false, false, false, false)))
-                        );
-                    }
+                final Field enemyField = client.getEnemyArea().getField(y, x);
+                final Field ownField = client.getOwnArea().getField(y, x);
+
+                final Pane paneEnemyArea = (Pane) FxUtils.getNodeFromGridPane(grid_enemy, x, y,10);
+                final Pane paneOwnArea = (Pane) FxUtils.getNodeFromGridPane(grid_own, x, y,10);
+
+                FxUtils.setBackgroundImage(paneOwnArea, ownField.getImage());
+
+                if (enemyField.isShoot()) {
+                    FxUtils.setBackgroundImage(paneEnemyArea, enemyField.getImage(), 30, 30);
+                }
+                else {
+                    FxUtils.setBackgroundImage(paneEnemyArea, ImageManager.IMAGE_MAP.get("water.png"), 30, 30);
                 }
             }
         }
@@ -135,29 +137,28 @@ public class GameController implements IController<GameController>, Initializabl
     /**
      * Handles shoot functionality.
      */
-    public void onClickShoot(MouseEvent event) {
-        if (event.getButton() == MouseButton.PRIMARY) {
-            double x = MouseInfo.getPointerInfo().getLocation().getX();
-            double y = MouseInfo.getPointerInfo().getLocation().getY();
+    public void onShoot(MouseEvent event) {
+        assert client != null;
 
-            double winLocX = BattleshipClientApp.stage.getX();
-            double winLocY = BattleshipClientApp.stage.getY();
+        if (client.canAttack() && event.getButton() == MouseButton.PRIMARY) {
+            final Tuple<Integer, Integer> cord = FxUtils.getMouseCordOverNode(grid_enemy, 30, -2, -3);
 
-            double gridPaneX = grid_enemy.getTranslateX();
-            double gridPaneY = grid_enemy.getTranslateY();
-
-            //TODO: Variablen überarbeiten (Stimmen die Koordinaten mit -1/-3)
-            int mouseX = (int) ((x - winLocX - gridPaneX) / 30) - 1;
-            int mouseY = (int) ((y - winLocY - gridPaneY) / 30) - 3;
+            int mouseX = cord.getKey();
+            int mouseY = cord.getValue();
 
             if ((mouseX >= 0 && mouseX < 10) && (mouseY >= 0 && mouseY < 10)) {
-                assert client != null;
+                final Boolean result = client.shootField(mouseX, mouseY);
 
-                if (client.getEnemyArea().shootField(mouseX, mouseY) == null){
-                    lbl_hit.setText("Feld wurde bereits abgeschossen! \n Versuche es nochmal!");
+                if (result == null){
+                    return;
                 }
 
-                client.getEnemyArea().shootField(mouseX, mouseY);
+                client.setAttack(result);
+
+                renderArea();
+
+                final ActionPacket packet = new ActionPacket("shoot", mouseX, mouseY);
+                client.getNetwork().sendPacket(packet);
             }
         }
     }
