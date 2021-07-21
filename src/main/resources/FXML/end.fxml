@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.gitlab.kaisoenmalex.windows.EndController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.gitlab.kaisoenmalex.windows.EndController">
    <HBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0">
-         <Label fx:id="lbl_result" alignment="CENTER" text="Label">
+         <Label fx:id="lbl_result" alignment="CENTER">
             <VBox.margin>
                <Insets top="50.0" />
             </VBox.margin>
@@ -24,12 +27,12 @@
                <Font size="20.0" />
             </font>
          </Label>
-         <Button fx:id="btn_menu" mnemonicParsing="false" prefHeight="40.0" text="Zurück zum Menü">
+         <Button fx:id="btn_menu" mnemonicParsing="false" onAction="#onCLickMenu" prefHeight="40.0" text="Zurück zum Menü">
             <VBox.margin>
                <Insets top="50.0" />
             </VBox.margin>
          </Button>
-         <Button fx:id="btn_quit" mnemonicParsing="false" text="Beenden">
+         <Button fx:id="btn_quit" mnemonicParsing="false" onAction="#onCLickQuit" text="Beenden">
             <VBox.margin>
                <Insets top="30.0" />
             </VBox.margin>

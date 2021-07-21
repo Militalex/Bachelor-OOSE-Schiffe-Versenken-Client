@@ -6,9 +6,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.fxml.FXML;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+/**
+ * author Sidar Sönmez
+ * @version 1
+ *
+ */
 
 public class EndController implements IController<EndController>, Initializable, ILogger {
 
@@ -26,6 +33,38 @@ public class EndController implements IController<EndController>, Initializable,
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        lbl_surrender.setVisible(false);
 
     }
+
+
+    public void renderEnd(boolean winner, boolean surrender)  {
+
+        if (winner) {
+            lbl_result.setText("Gewonnen");
+        } else {
+            lbl_result.setText("Verloren");
+        }
+
+        if (!winner && surrender ) {
+            lbl_surrender.setVisible(true);
+        }
+
+    }
+
+
+    public void onCLickMenu() {
+
+        BattleshipClientApp.changeScene("/FXML/menu.fxml","Schiffe platzieren", 800, 550, false);
+
+    }
+
+    public void onCLickQuit() {
+
+        Stage stage = (Stage) btn_quit.getScene().getWindow();
+        stage.close();
+
+    }
+
+
 }
