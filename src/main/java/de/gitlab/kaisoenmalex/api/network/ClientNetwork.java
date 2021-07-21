@@ -163,7 +163,7 @@ public class ClientNetwork implements ILogger, Closeable {
                 if (objectReader == null) objectReader = TCPUtil.getObjectReader(socket);
 
                 try{
-                    if (TCPUtil.getReader(socket).ready()) {
+                    while (TCPUtil.getReader(socket).ready()) {
                         ActionPacket packet = (ActionPacket) TCPUtil.receiveObject(objectReader);
                         handleServerRequests(objectWriter, objectReader, packet);
                     }
