@@ -17,7 +17,7 @@ import java.io.ObjectOutputStream;
 
 /**
  * @author Alexander Ley
- * @version 1.3.1
+ * @version 1.3.2
  *
  * This class defines all client reactions.
  * Note every Method have (ObjectOutputStream writer, Object... parameters) Parameters.
@@ -110,12 +110,22 @@ public class ActionHandler implements ILogger{
     }
 
     /**
-     *
      * Answers Server alive packet to tell server "Hey i'm still here!".
      */
     private static void isAlive(ObjectOutputStream writer) {
         System.out.println("Alive");
         final ActionPacket packet = new ActionPacket("refreshClient");
         TCPUtil.sendObject(writer, packet);
+    }
+
+    /**
+     * Request client to refresh Status.
+     */
+    private static void refreshStatus(ObjectOutputStream writer) throws IOException {
+        final BattleshipClient client = BattleshipClientApp.client;
+        assert client != null;
+
+        final GameStatusPacket packet = client.getNetwork().getGameStatus(new RequestGameStatusPacket(client.getCode(), client.isHost()));
+        Platform.runLater(() ->receiveStatus(writer, packet));
     }
 }
