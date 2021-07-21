@@ -8,9 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
-import java.awt.*;
 import java.io.Closeable;
 import java.net.URL;
 import java.util.HashMap;
@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Kai Sturm
- * @version 1.3.2
+ * @version 1.3.3
  * latest author: Alexander Ley
  *
  * This class handles functionality of ships placer window.
@@ -149,10 +149,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
                 final Pane pane = ((Pane) FxUtils.getNodeFromGridPane(gridPane, x, y, 10));
                 final Field field = AREA.getField(y, x);
 
-                pane.setBackground(new Background(
-                        new BackgroundImage(field.getImage(), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                                new BackgroundSize(39, 39, false, false, false, false)))
-                );
+                FxUtils.setBackgroundImage(pane, field.getImage(), 39, 39);
             }
         }
 
