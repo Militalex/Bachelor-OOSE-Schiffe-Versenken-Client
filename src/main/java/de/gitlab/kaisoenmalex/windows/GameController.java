@@ -24,8 +24,8 @@ import java.util.ResourceBundle;
 
 /**
  * @author Kai Sturm
- * @version 1.2
- * last Editor: Alexander Ley
+ * @version 1.2.1
+ * last Editor: Sidar Sönmez
  *
  * This class handles functionality of game window.
  */
@@ -103,7 +103,14 @@ public class GameController implements IController<GameController>, Initializabl
 
             lbl_hit.setText(status.getEnemyShootText());
 
-            attacker = (whoCanAttack) ? status.getOwnName() + " ist dran!" : status.getEnemyName() + " ist dran!";
+
+            attacker = (whoCanAttack) ? "Du bist dran!" : "Gegner ist dran!";
+            if (whoCanAttack) {
+                lbl_actualPlayer.setStyle("-fx-text-fill: red");
+            } else {
+                lbl_actualPlayer.setStyle("-fx-text-fill: black");
+            }
+
 
             lbl_actualPlayer.setText(attacker);
 
@@ -166,4 +173,5 @@ public class GameController implements IController<GameController>, Initializabl
     public void onClickQuit() {
 
     }
+
 }
