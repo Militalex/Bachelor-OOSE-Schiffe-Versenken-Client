@@ -14,6 +14,7 @@ import javafx.application.Platform;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author Alexander Ley
@@ -61,8 +62,10 @@ public class ActionHandler implements ILogger{
             enemyArea.stream().forEach(field -> {
                 final Field newField = new Field(field.getXCord(), field.getYCord());
 
+                final boolean isShoot = field.isShoot();
+
                 if (field.isShip()) field.setShip(Field.ShipPart.MIDDLE);
-                if (field.isShoot()) field.shoot();
+                if (isShoot) field.shoot();
 
                 area.setField(newField, field.getXCord(), field.getYCord());
             });
@@ -99,10 +102,21 @@ public class ActionHandler implements ILogger{
     /**
      * Abort game e.g. if enemy has left game. Winner is not defined.
      */
-    private static void abortGame(ObjectOutputStream writer){
+    private static void abortGame(ObjectOutputStream writer, String msg){
         System.out.println("Abort");
 
-        ILogger.showError("Verbindung zum Gegner ist abgebrochen. Bitte versuche es erneut.");
+        CountDownLatch latch = new CountDownLatch(1);
+
+        Platform.runLater(() -> {
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        ILogger.showError(msg);
+        latch.countDown();
+
         Platform.runLater(() -> BattleshipClientApp.changeScene("/FXML/shipsPlacer.fxml", "Schiffe platzieren", 800, 550, false));
 
         assert BattleshipClientApp.client != null;
