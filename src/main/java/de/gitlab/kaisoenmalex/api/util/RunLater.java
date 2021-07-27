@@ -4,21 +4,21 @@ import java.util.function.Consumer;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.1
  *
  * Thsi class is used to perform an action a specific amount of time later.
  */
 public class RunLater extends Tickable{
 
     private final int timeOut;
-    private final Consumer<Object> consumer;
+    private final Consumer<Void> consumer;
 
     private int counter = 0;
 
     /**
      * @param timeOut in seconds
      */
-    public RunLater(int timeOut, Consumer<Object> consumer) {
+    public RunLater(int timeOut, Consumer<Void> consumer) {
         this.timeOut = timeOut;
         this.consumer = consumer;
 
