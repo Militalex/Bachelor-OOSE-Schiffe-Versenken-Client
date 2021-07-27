@@ -3,6 +3,7 @@ package de.gitlab.kaisoenmalex.windows;
 import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
 import de.gitlab.kaisoenmalex.api.util.*;
 import javafx.application.Application;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,7 +18,7 @@ import java.util.zip.ZipInputStream;
 
 /**
  * @author Alexander Ley
- * @version 1.4
+ * @version 1.4.1
  * latest author: Alexander Ley
  *
  * This Class is the entry Point into the Application.
@@ -25,6 +26,8 @@ import java.util.zip.ZipInputStream;
 public class BattleshipClientApp extends Application implements ILogger {
 
     public static Application application;
+    public static MediaPlayer player;
+
     private static File tmpFolder;
 
 
@@ -47,6 +50,8 @@ public class BattleshipClientApp extends Application implements ILogger {
         loadImages();
 
         changeScene("/FXML/menu.fxml", "Schiffe Versenken", 600, 400, false);
+
+        FxUtils.playMusic("/sounds/lobby.mp3");
 
         stage.show();
 

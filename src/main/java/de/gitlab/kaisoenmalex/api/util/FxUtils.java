@@ -8,15 +8,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
  * @author Alexander Ley
- * @version 1.3
+ * @version 1.3.5
  *
  * This class offers help methods for JavaFx things.
  */
@@ -137,5 +140,15 @@ public class FxUtils implements ILogger{
         };
         sleeper.setOnSucceeded(event -> action.accept(null));
         new Thread(sleeper).start();
+    }
+
+    /**
+     * Plays a sound as loop.
+     * @param path same parameter as in getClass.getResource(..)
+     */
+    public static void playMusic(String path){
+        BattleshipClientApp.player = new MediaPlayer(new Media(Objects.requireNonNull(FxUtils.class.getResource(path)).toExternalForm()));
+        BattleshipClientApp.player.play();
+        BattleshipClientApp.player.setCycleCount(Integer.MAX_VALUE);
     }
 }
