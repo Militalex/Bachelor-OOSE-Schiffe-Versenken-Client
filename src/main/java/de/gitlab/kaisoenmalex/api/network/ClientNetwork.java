@@ -6,10 +6,7 @@ import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
 import de.gitlab.kaisoenmalex.api.network.packets.GameStatusPacket;
 import de.gitlab.kaisoenmalex.api.network.packets.RequestGameStatusPacket;
 import de.gitlab.kaisoenmalex.api.util.*;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
+import okhttp3.*;
 import org.slf4j.Logger;
 
 import java.io.Closeable;
@@ -22,7 +19,7 @@ import java.util.Objects;
 
 /**
  * @author Alexander Ley
- * @version 1.3
+ * @version 1.4
  *
  * This Class helps to communicate with Server. It can send things to server and handle server requests.
  */
@@ -115,6 +112,36 @@ public class ClientNetwork implements ILogger, Closeable {
 
     public void sendPacket(ActionPacket obj) {
         TCPUtil.sendObject(listener.getObjectWriter(), obj);
+    }
+
+    /**
+     * Sends ActionPacket asynchronously to server via Http request.
+     * @throws IOException if the request could not be executed due to cancellation, a connectivity problem or timeout.
+     * Because networks can fail during an exchange,
+     * it is possible that the remote server accepted the request before the failure.
+     */
+    public void sendAsyncPacket(ActionPacket obj) throws IOException {
+        ILogger.STATIC_LOGGER.info("Async Send: " + obj.getMethodName() + ": " + obj);
+
+        final ActionPacket packet = new ActionPacket(obj.getMethodName());
+
+        packet.addParameter(client.getCode());
+        packet.addParameter(client.isHost());
+        obj.getParameters().forEach(packet::addParameter);
+
+        final String json = TCPUtil.gson.toJson(packet);
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(TCPUtil.SERVER_ADDRESS + "asyncAction")
+                .post(RequestBody.create(json, MediaType.parse("application/json; charset=utf-8")))
+                .build();
+
+        final Response response = client.newCall(request).execute();
+
+        if (response.code() == 404){
+            LOGGER.warn("Async packet is not valid!");
+        }
     }
 
     /**
