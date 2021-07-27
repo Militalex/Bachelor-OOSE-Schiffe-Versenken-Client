@@ -18,18 +18,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
+import java.io.Closeable;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayDeque;
 import java.util.ResourceBundle;
 
 /**
  * @author Kai Sturm
- * @version 1.2.1
- * last Editor: Sidar Sönmez
+ * @version 1.3
+ * last Editor: Alexander Ley
  *
  * This class handles functionality of game window.
  */
-public class GameController implements IController<GameController>, Initializable {
+public class GameController implements IController<GameController>, Initializable, Closeable {
 
     @FXML Label lbl_enemyName;
     @FXML GridPane grid_enemy;
@@ -153,17 +155,28 @@ public class GameController implements IController<GameController>, Initializabl
                 }
 
                 client.setAttack(result);
-
                 renderArea();
 
                 final ActionPacket packet = new ActionPacket("shoot", mouseX, mouseY);
-                client.getNetwork().sendPacket(packet);
+                try {
+                    client.getNetwork().sendAsyncPacket(packet);
+                }
+                catch (IOException ignored) { }
             }
         }
+    }
+
+    @Override
+    public void close() throws IOException {
+        final ActionPacket packet = new ActionPacket("abortGame");
+
+        assert client != null;
+        client.getNetwork().sendAsyncPacket(packet);
+
+        FxUtils.runLater(10000, unused -> client.close());
     }
 
     public void onClickQuit() {
 
     }
-
 }
