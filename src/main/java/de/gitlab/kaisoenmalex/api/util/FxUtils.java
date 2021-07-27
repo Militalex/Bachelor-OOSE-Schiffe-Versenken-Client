@@ -1,7 +1,6 @@
 package de.gitlab.kaisoenmalex.api.util;
 
 import de.gitlab.kaisoenmalex.windows.BattleshipClientApp;
-import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -12,11 +11,10 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.util.function.Consumer;
 
 /**
  * @author Alexander Ley
- * @version 1.3
+ * @version 1.2.5
  *
  * This class offers help methods for JavaFx things.
  */
@@ -118,24 +116,5 @@ public class FxUtils implements ILogger{
             }
         }
         return null;
-    }
-
-    /**
-     * Runs a task specific time later (Alternative to runLater class).
-     * @param timeOut timeOut in milliseconds
-     * @param action task (as lambda).
-     */
-    public static void runLater(int timeOut, Consumer<Void> action){
-        Task<Void> sleeper = new Task<>() {
-            @Override
-            protected Void call() {
-                try {
-                    Thread.sleep(timeOut);
-                } catch (InterruptedException ignored) { }
-                return null;
-            }
-        };
-        sleeper.setOnSucceeded(event -> action.accept(null));
-        new Thread(sleeper).start();
     }
 }
