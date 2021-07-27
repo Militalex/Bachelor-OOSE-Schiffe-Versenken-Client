@@ -42,6 +42,7 @@ public class TCPUtil implements ILogger{
         String obj = Objects.requireNonNull((response = client.newCall(request).execute()).body()).string();
 
         if (response.code() == 404) throw new CodeInvalidException("Code: " + packet.getCode() + " is not suitable.");
+        response.close();
 
         //String code, Integer port
         return gson.fromJson(obj, new TypeToken<Tuple<String, Integer>>(){}.getType());

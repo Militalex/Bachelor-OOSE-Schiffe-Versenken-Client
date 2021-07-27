@@ -105,7 +105,9 @@ public class ClientNetwork implements ILogger, Closeable {
                 .post(RequestBody.create(json, MediaType.parse("application/json; charset=utf-8")))
                 .build();
 
-        String obj = Objects.requireNonNull(client.newCall(request).execute().body()).string();
+        Response response;
+        String obj = Objects.requireNonNull((response = client.newCall(request).execute()).body()).string();
+        response.close();
 
         return TCPUtil.gson.fromJson(obj, GameStatusPacket.class);
     }
@@ -142,6 +144,7 @@ public class ClientNetwork implements ILogger, Closeable {
         if (response.code() == 404){
             LOGGER.warn("Async packet is not valid!");
         }
+        response.close();
     }
 
     /**
