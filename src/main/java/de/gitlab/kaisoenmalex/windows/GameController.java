@@ -35,9 +35,7 @@ public class GameController implements IController<GameController>, Initializabl
     @FXML GridPane grid_enemy;
     @FXML Label lbl_ownName;
     @FXML GridPane grid_own;
-    @FXML Label lbl_hit;
     @FXML Label lbl_actualPlayer;
-    @FXML Label lbl_water;
     @FXML Button btn_quit;
 
     private final BattleshipClient client = BattleshipClientApp.client;
@@ -85,23 +83,17 @@ public class GameController implements IController<GameController>, Initializabl
             lbl_enemyName.setVisible(false);
             lbl_ownName.setVisible(false);
             lbl_actualPlayer.setVisible(false);
-            lbl_hit.setVisible(false);
-            lbl_water.setVisible(false);
         }
         else{
             lbl_enemyName.setVisible(true);
             lbl_ownName.setVisible(true);
             lbl_actualPlayer.setVisible(true);
-            lbl_hit.setVisible(true);
-            lbl_water.setVisible(true);
 
             boolean whoCanAttack = status.canAttack();
             String attacker;
 
             lbl_enemyName.setText(status.getEnemyName() + " (gegnerisches Gebiet)");
             lbl_ownName.setText(status.getOwnName() + " (eigenes Gebiet)");
-
-            lbl_hit.setText(status.getEnemyShootText());
 
 
             attacker = (whoCanAttack) ? "Du bist dran!" : "Gegner ist dran!";
