@@ -60,7 +60,7 @@ public class BattleshipClientApp extends Application implements ILogger {
 
     @Override
     public void stop() {
-        if (client != null){
+        if (client != null && !(activeController instanceof GameController)){
             client.close();
         }
 
