@@ -85,16 +85,12 @@ public class ActionHandler implements ILogger{
         final BattleshipClient client = BattleshipClientApp.client;
         assert client != null;
 
-        client.close();
-
         Platform.runLater(() -> {
             BattleshipClientApp.changeScene("/FXML/end.fxml", (hasWon) ? "Gewonnen!" : "Verloren!", 600, 400, false);
             ((EndController) BattleshipClientApp.activeController.getInstance()).renderEnd(hasWon, hasGivenUp);
         });
 
-
         client.close();
-        BattleshipClientApp.client = null;
     }
 
     /**
