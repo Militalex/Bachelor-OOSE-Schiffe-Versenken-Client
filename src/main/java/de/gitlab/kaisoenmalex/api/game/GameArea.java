@@ -253,17 +253,12 @@ public class GameArea implements Serializable {
     /**
      * Checks if all ships are shot
      */
-
     public boolean allShipsShot() {
-
-            for (int x = 0; x < area.length; x++){
-                for (int y = 0; y < area[x].length; y++){
-                    if (getField(x, y).isShip() && !(getField(x, y).isShoot())) return false;
-                }
+        for (int x = 0; x < area.length; x++){
+            for (int y = 0; y < area[x].length; y++){
+                if (getField(x, y).isShip() && !(getField(x, y).isShoot())) return false;
             }
-
-            return true;
         }
-
-
+        return true;
+    }
 }
