@@ -9,6 +9,7 @@ import de.gitlab.kaisoenmalex.api.network.packets.RequestGameStatusPacket;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
 import de.gitlab.kaisoenmalex.api.util.TCPUtil;
 import de.gitlab.kaisoenmalex.windows.BattleshipClientApp;
+import de.gitlab.kaisoenmalex.windows.EndController;
 import de.gitlab.kaisoenmalex.windows.GameController;
 import javafx.application.Platform;
 
@@ -79,21 +80,18 @@ public class ActionHandler implements ILogger{
     /**
      * Stops game and defines a winner.
      */
-    private static void stopGame(ObjectOutputStream writer, boolean hasWon){
+    private static void stopGame(ObjectOutputStream writer, boolean hasWon, boolean hasGivenUp){
         System.out.println("Stop");
         final BattleshipClient client = BattleshipClientApp.client;
         assert client != null;
 
         client.close();
 
-        if (hasWon) {
-            //TODO: Gewonnenfenster anzeigen.
-            Platform.runLater(() -> BattleshipClientApp.changeScene("/FXML/menu.fxml", "Schiffe versenken", 600, 800, false));
-        }
-        else {
-            //TODO: Verlorenfenster anzeigen.
-            Platform.runLater(() -> BattleshipClientApp.changeScene("/FXML/menu.fxml", "Schiffe versenken", 600, 800, false));
-        }
+        Platform.runLater(() -> {
+            BattleshipClientApp.changeScene("/FXML/end.fxml", (hasWon) ? "Gewonnen!" : "Verloren!", 600, 400, false);
+            ((EndController) BattleshipClientApp.activeController.getInstance()).renderEnd(hasWon, hasGivenUp);
+        });
+
 
         client.close();
         BattleshipClientApp.client = null;
