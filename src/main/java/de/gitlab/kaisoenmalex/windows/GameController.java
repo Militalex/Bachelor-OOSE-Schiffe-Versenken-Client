@@ -4,10 +4,7 @@ import de.gitlab.kaisoenmalex.api.game.BattleshipClient;
 import de.gitlab.kaisoenmalex.api.game.Field;
 import de.gitlab.kaisoenmalex.api.network.packets.ActionPacket;
 import de.gitlab.kaisoenmalex.api.network.packets.GameStatusPacket;
-import de.gitlab.kaisoenmalex.api.util.FxUtils;
-import de.gitlab.kaisoenmalex.api.util.IController;
-import de.gitlab.kaisoenmalex.api.util.ImageManager;
-import de.gitlab.kaisoenmalex.api.util.Tuple;
+import de.gitlab.kaisoenmalex.api.util.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.Closeable;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayDeque;
 import java.util.ResourceBundle;
 
 /**
@@ -105,7 +101,6 @@ public class GameController implements IController<GameController>, Initializabl
                 lbl_actualPlayer.setStyle("-fx-text-fill: black");
             }
 
-
             lbl_actualPlayer.setText(attacker);
 
             renderArea();
@@ -177,6 +172,13 @@ public class GameController implements IController<GameController>, Initializabl
     }
 
     public void onClickQuit() {
-
+        final ActionPacket packet = new ActionPacket("giveUp");
+        assert client != null;
+        try {
+            client.getNetwork().sendAsyncPacket(packet);
+        } catch (IOException e) {
+            ILogger.showError("Aufgeben konnte nicht durchgeführt werden, Spiel wird geschlossen.");
+            BattleshipClientApp.stage.close();
+        }
     }
 }
