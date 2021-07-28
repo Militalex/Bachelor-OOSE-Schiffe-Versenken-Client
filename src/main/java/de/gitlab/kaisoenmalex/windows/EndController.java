@@ -32,39 +32,29 @@ public class EndController implements IController<EndController>, Initializable,
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         lbl_surrender.setVisible(false);
-
     }
 
 
-    public void renderEnd(boolean winner, boolean surrender)  {
-
+    public void renderEnd(boolean winner, boolean hasGivenUp)  {
         if (winner) {
             lbl_result.setText("Gewonnen");
         } else {
             lbl_result.setText("Verloren");
         }
 
-        if (!winner && surrender ) {
+        if (!winner && hasGivenUp ) {
             lbl_surrender.setVisible(true);
         }
-
     }
 
-
     public void onCLickMenu() {
-
-        BattleshipClientApp.changeScene("/FXML/menu.fxml","Schiffe platzieren", 800, 550, false);
-
+        assert BattleshipClientApp.client != null;
+        BattleshipClientApp.client.close();
+        BattleshipClientApp.changeScene("/FXML/menu.fxml","Schiffe platzieren", 600, 400, false);
     }
 
     public void onCLickQuit() {
-
-        Stage stage = (Stage) btn_quit.getScene().getWindow();
-        stage.close();
-
+        BattleshipClientApp.stage.close();
     }
-
-
 }
