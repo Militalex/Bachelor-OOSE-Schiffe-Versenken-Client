@@ -1,6 +1,7 @@
-<svg fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg fill="none" width="800" height="4500" xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml">
+	<head>
         <meta charset="utf-8"></meta>
         <meta name="author" content="Kai Sturm"></meta>
         <link rel="stylesheet" type="text/css" href="css/style.css"></link>
@@ -11,7 +12,8 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <link rel="preconnect" href="https://fonts.gstatic.com"></link>
-
+		<link href='http://fonts.googleapis.com/css?family=Otomanopee+One:300,400' rel='stylesheet' type='text/css'></link>     
+	</head>
     <body>
         <!-- Header -->
         <div id="header">
@@ -87,7 +89,7 @@
 
                 <br></br>
                 <p>
-                    Der Schießende gibt an, auf welches Feld er feuert. Der Server sieht auf den Plan und antwortet mit Wasser oder Treffer.
+                    Der Schießende gibt an, auf welches Feld er feuert. Der Server sieht auf den Plan und antwortet mit Wasser oder Treffer
                     Ein Schiff gilt als versenkt, wenn alle Felder des Schiffes getroffen wurden.
                     Es wird notiert, welche Felder bereits mit welchem Ergebnis abgeschossen wurden.
                     Der Beschossene sieht ebenfalls, welche Felder der Gegner bereits getroffen hat.
@@ -144,7 +146,8 @@
                         Dabei wird ein Code generiert, der an den Mitspieler gesendet werden kann.
                     </li>
                     <li>
-                        Wenn man ein neues Spiel erstellen und dabei mit einem zufälligen Spieler spielen möchte so wählt man "Neues Spiel" und setzt bei "zufällig einen Haken" und bestätigt.
+                        Wenn man ein neues Spiel erstellen und dabei mit einem zufälligen Spieler spielen möchte
+						so wählt man "Neues Spiel" und setzt bei "zufällig einen Haken" und bestätigt.
                         Dabei wird ein Code generiert, der an den Mitspieler gesendet werden kann.
                     </li>
                     <li>
