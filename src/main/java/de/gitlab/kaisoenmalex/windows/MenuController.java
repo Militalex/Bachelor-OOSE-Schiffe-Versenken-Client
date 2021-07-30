@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 
 /**
  * @author Kai Sturm
- * @version 1.0
+ * @version 1.1
  *
  * This class handles functionality of menu.
  */
@@ -26,6 +26,7 @@ public class MenuController implements IController<MenuController>, ILogger {
     }
 
     public void onClickRules() {
-        BattleshipClientApp.changeScene("/FXML/rules.fxml", "Regeln", 600, 400, false);
+        BattleshipClientApp.changeScene("/FXML/rules.fxml", "Regeln", 800, 600, false);
+        ((RulesController) BattleshipClientApp.activeController.getInstance()).nameController(true);
     }
 }
