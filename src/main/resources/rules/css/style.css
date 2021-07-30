@@ -45,6 +45,11 @@ a:hover {
     align-content: center;
 }
 
+#imageShips {
+    width: 175px;
+    height: 175px;
+}
+
 #footer {
     background-color: lightgrey;
     padding-left: 1%;
