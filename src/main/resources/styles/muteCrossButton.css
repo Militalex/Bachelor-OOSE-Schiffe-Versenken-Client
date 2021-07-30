@@ -1,0 +1,6 @@
+Button {
+    -fx-background-image: url("../textures/crossSpeaker.png");
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

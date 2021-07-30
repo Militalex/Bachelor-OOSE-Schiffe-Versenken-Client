@@ -1,0 +1,6 @@
+Button {
+    -fx-background-image: url("../textures/speaker.png");
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
