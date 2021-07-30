@@ -46,7 +46,7 @@
                     Folgende Regeln müssen beim Platzieren eingehalten werden:
                 </p>
 
-                <ol>
+                <ol start="0">
                     <li>
                         Die Schiffe dürfen nicht aneinander stoßen.
                         <br>
@@ -78,12 +78,13 @@
                 </ol>
 
                 <br>
-                <p> Der Schießende gibt an, auf welches Feld er feuert. Der Server sieht auf den Plan und antwortet mit Wasser oder Treffer.
-                Ein Schiff gilt als versenkt, wenn alle Felder des Schiffes getroffen wurden.
-                Es wird notiert, welche Felder bereits mit welchem Ergebnis abgeschossen wurden.
-                Der Beschossene sieht ebenfalls, welche Felder der Gegner bereits getroffen hat.
-                Der Spieler am Zug darf so lange schießen bis er ins Wasser getroffen hat. Danach ist der Gegenspieler am Zug.
-                Wer zuerst alle Schiffe des Gegners versenkt hat, ist der Sieger.
+                <p>
+                    Der Schießende gibt an, auf welches Feld er feuert. Der Server sieht auf den Plan und antwortet mit Wasser oder Treffer.
+                    Ein Schiff gilt als versenkt, wenn alle Felder des Schiffes getroffen wurden.
+                    Es wird notiert, welche Felder bereits mit welchem Ergebnis abgeschossen wurden.
+                    Der Beschossene sieht ebenfalls, welche Felder der Gegner bereits getroffen hat.
+                    Der Spieler am Zug darf so lange schießen bis er ins Wasser getroffen hat. Danach ist der Gegenspieler am Zug.
+                    Wer zuerst alle Schiffe des Gegners versenkt hat, ist der Sieger.
                 </p>
                 <br>
 
@@ -96,12 +97,18 @@
                 <br>
 
                 <p>
-                    Es gibt zwei Möglichkeiten:
+                    Es gibt zwei Möglichkeiten der Installation:
                 </p>
-                <br>
                 <ol start="0">
-                    <li> Placeholder </li>
-                    <li> Placeholder </li>
+                    <li> Die erforderlichen .jar Dateien vom Client und Server können durch Klonen und
+                        anschließender Ausführung der gradle/build/jar task manuell erstellt werden. </li>
+                    <li> Die erforderlichen .jar Dateien finden sich auch unter den Projekten als sogenannter Release. </li>
+                    <li>
+                        Es gilt zu beachten, dass aktuell bereits von uns ein Schiffe-Versenken Server auf einem Linux Root Server im Internet gehostet wird.
+                        Dessen Adresse ist im Code verankert und müsste für lokale Server-Client Testzwecke angepasst werden.
+                        <br>
+                        (SERVER_ADDRESS = "http://localhost:4567/"; HOST_ADDRESS = "localhost";).
+                    </li>
                 </ol>
 
                 <br>
@@ -121,20 +128,22 @@
                 <br>
 
                 <p>
-                    Der Spieler muss zunächst seinen Namen eingeben. Danach werden ihm drei Möglichkeiten geboten, er kann:
+                    Zum Einloggen muss der Spieler zunächst seinen Namen eingeben. Danach gibt es drei Möglichkeiten fortzufahren:
                 </p>
-                <ol>
+                <ol start="0">
                     <li>
-                        Ein neues Spiel erstellen, indem er die Option "neues Spiel" auswählt und die Option "zufällig"
-                        <u>nicht</u> auswählt.
+                        Wenn man ein neues Spiel erstellen und dabei mit einem bestimmten Spieler spielen möchte so wählt man "Neues Spiel" und bestätigt.
+                        Dabei wird ein Code generiert, der an den Mitspieler gesendet werden kann.
                     </li>
                     <li>
-                        Einem zufälligen Spiel beitreten, indem er die Option "neues Spiel" und die Option
-                        "zufällig" auswählt.
+                        Wenn man ein neues Spiel erstellen und dabei mit einem zufälligen Spieler spielen möchte so wählt man "Neues Spiel" und setzt bei "zufällig einen Haken" und bestätigt.
+                        Dabei wird ein Code generiert, der an den Mitspieler gesendet werden kann.
                     </li>
                     <li>
-                        Einem bestimmtem Spiel per Code beitreten, indem er die Option "Spiel beitreten" auswählt und
-                        den Code in entsprechendes Fenster eingibt.
+                        Wenn man mit einem Code einem Spiel beitreten möchte, so wählt man "Spiel betreten" und gibt diesen in dem erscheinenden Textfeld ein und bestätigt.
+                    </li>
+                    <li>
+                        Der Host Spieler kann angeben, ob das Spiel in der Pro oder Noob Version gespielt wird. In der Pro Version werden die Schiffsenden nicht als solche dargestellt.
                     </li>
                 </ol>
 
@@ -143,7 +152,7 @@
                 <br>
 
                 <p>
-                    Placeholder
+                    Der Spieler am Zug hat die Möglichkeit, durchs Linksklicken auf das obere gegnerische Feld, dieses abzuschießen.
                 </p>
 
                 <br>
@@ -229,7 +238,7 @@
                     <ul>
                         <li> Saarcraft iOser100 Edition </li>
                         <li> <a href="https://www.curseforge.com/minecraft/texture-packs/ioser-100-faithfull-edit/files" target="_blank"> Zum "Ressource-Pack" </a> </li>
-                        <li> Es wurden keinerlei Veränderungen an dem Werk vorgenommen. </li>
+                        <li> Es wurden Texturen aus dem Packet bearbeitet und verwendet. </li>
                     </ul>
                 </ul>
                 <br>
