@@ -10,6 +10,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Closeable;
 import java.net.URL;
@@ -23,7 +24,7 @@ import java.util.ResourceBundle;
  *
  * This class handles functionality of ships placer window.
  */
-public class ShipsPlacerController implements IController<ShipsPlacerController>, ILogger, Initializable, Closeable {
+public class ShipsPlacerController implements IController<ShipsPlacerController>, ILogger, Closeable {
 
     @FXML private GridPane gridPane;
     @FXML private Button btn_clear;
@@ -49,6 +50,8 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
     @FXML private Pane pane_2_4ship;
     @FXML private Pane pane_2ship_dad;
 
+    @FXML private Button btn_mute;
+
     public static final GameArea AREA = new GameArea();
 
     /**
@@ -66,11 +69,18 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
         return this;
     }
 
+    @Override
+    public @Nullable Button getMuteButton() {
+        return btn_mute;
+    }
+
     /**
      * Fills gridPane (GameArea) with imageViews and do several initialize stuff.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        IController.super.initialize(location, resources);
+
         paneDadMap.put(pane_5ship, pane_5ship_dad);
         paneDadMap.put(pane_4_1ship, pane_4ship_dad);
         paneDadMap.put(pane_4_2ship, pane_4ship_dad);
@@ -117,7 +127,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
             }
         }
 
-        /*AREA.placeShip(0, 0, 5, true);
+        AREA.placeShip(0, 0, 5, true);
         AREA.placeShip(2, 0, 4, true);
         AREA.placeShip(4, 0, 4, true);
         AREA.placeShip(6, 0, 3, true);
@@ -127,7 +137,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
         AREA.placeShip(4, 8, 2, true);
         AREA.placeShip(6, 8, 2, true);
 
-        paneDadMap.keySet().forEach(pane -> pane.setVisible(false));*/
+        paneDadMap.keySet().forEach(pane -> pane.setVisible(false));
 
         renderArea();
     }

@@ -22,12 +22,12 @@ import java.util.ResourceBundle;
 
 /**
  * @author Kai Sturm
- * @version 1.3
+ * @version 1.4
  * last Editor: Alexander Ley
  *
  * This class handles functionality of game window.
  */
-public class GameController implements IController<GameController>, Initializable, Closeable {
+public class GameController implements IController<GameController>, Closeable {
 
     @FXML Label lbl_enemyName;
     @FXML GridPane grid_enemy;
@@ -36,6 +36,8 @@ public class GameController implements IController<GameController>, Initializabl
     @FXML Label lbl_actualPlayer;
     @FXML Button btn_quit;
 
+    @FXML private Button btn_mute;
+
     private final BattleshipClient client = BattleshipClientApp.client;
 
     @Override
@@ -43,11 +45,18 @@ public class GameController implements IController<GameController>, Initializabl
         return this;
     }
 
+    @Override
+    public @Nullable Button getMuteButton() {
+        return btn_mute;
+    }
+
     /**
      * Sets Panes into GridPanes and render area.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        IController.super.initialize(location, resources);
+
         for (int x = 0; x < 10; x++){
             for (int y = 0; y < 10; y++) {
                 final Pane paneOwn = new Pane();
@@ -95,10 +104,16 @@ public class GameController implements IController<GameController>, Initializabl
 
 
             attacker = (whoCanAttack) ? "Du bist dran!" : "Gegner ist dran!";
+
             if (whoCanAttack) {
                 lbl_actualPlayer.setStyle("-fx-text-fill: red");
-            } else {
+                SoundUtil.playHitman();
+                if (NumberUtil.equals(SoundUtil.baseVolume, 0)) SoundUtil.player.setVolume(0);
+            }
+            else {
                 lbl_actualPlayer.setStyle("-fx-text-fill: black");
+                SoundUtil.playLobby();
+                if (NumberUtil.equals(SoundUtil.baseVolume, 0)) SoundUtil.player.setVolume(0);
             }
 
             lbl_actualPlayer.setText(attacker);
@@ -168,7 +183,7 @@ public class GameController implements IController<GameController>, Initializabl
         assert client != null;
         client.getNetwork().sendAsyncPacket(packet);
 
-        FxUtils.runLater(10000, unused -> client.close());
+        client.close();
     }
 
     public void onClickQuit() {

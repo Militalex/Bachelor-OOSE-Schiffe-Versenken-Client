@@ -9,6 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -22,7 +24,7 @@ import java.util.ResourceBundle;
  *
  * This class handles functionality of the login window.
  */
-public class LoginController implements IController<LoginController>, Initializable, ILogger {
+public class LoginController implements IController<LoginController>, ILogger {
 
     @FXML private CheckBox check_random;
     @FXML private TextField txt_code;
@@ -32,9 +34,16 @@ public class LoginController implements IController<LoginController>, Initializa
     @FXML private CheckBox check_pro;
     @FXML private TextField txt_name;
 
+    @FXML private Button btn_mute;
+
     @Override
     public LoginController getInstance() {
         return this;
+    }
+
+    @Override
+    public @Nullable Button getMuteButton() {
+        return btn_mute;
     }
 
     Logger logger = getLogger();
@@ -44,6 +53,7 @@ public class LoginController implements IController<LoginController>, Initializa
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        IController.super.initialize(location, resources);
 
         //Define Combobox
         cmb_session.setItems(FXCollections.observableArrayList("Neues Spiel", "Spiel beitreten"));
@@ -55,8 +65,6 @@ public class LoginController implements IController<LoginController>, Initializa
         txt_code.visibleProperty().bind(check_random.visibleProperty().not());
         lbl_level.visibleProperty().bind(check_random.visibleProperty());
         check_pro.visibleProperty().bind(check_random.visibleProperty());
-
-
 
         //Listener
         cmb_session.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
@@ -72,14 +80,12 @@ public class LoginController implements IController<LoginController>, Initializa
                 });
 
         cmb_session.getSelectionModel().select(0);
-
     }
 
     /**
      * Connect to Server and sends ConnectPacket.
      */
     public void onClickConfirm() {
-
         final boolean isHost = cmb_session.getSelectionModel().getSelectedIndex() == 0;
         final boolean isNoobVariant = !(check_pro.isSelected());
         final boolean isRandomEnemy = check_random.isSelected();
@@ -87,8 +93,8 @@ public class LoginController implements IController<LoginController>, Initializa
 
         ShipsPlacerController.AREA.removeAllMarks();
 
+        //Connect to server by instantiating a new client.
         final ConnectPacket connectPacket = new ConnectPacket(txt_name.getText(), isHost, isNoobVariant, isRandomEnemy, (isHost ? null : code), ShipsPlacerController.AREA);
-
         try {
             BattleshipClientApp.client = new BattleshipClient(connectPacket);
         }
@@ -103,10 +109,11 @@ public class LoginController implements IController<LoginController>, Initializa
             return;
         }
 
+        //Go tonext waiting scene -> Connection is ready.
         BattleshipClientApp.changeScene("/FXML/wait.fxml", "Spiel wird vorbereitet ...", 600, 400, false);
-
         final WaitController waitController = (WaitController) BattleshipClientApp.activeController.getInstance();
 
+        //Modify independently waiting window.
         if (isHost) {
             waitController.lbl_wait.setText("Warte auf Gegner");
             if (!isRandomEnemy) {

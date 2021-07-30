@@ -7,24 +7,35 @@ import javafx.scene.control.Button;
 
 /**
  * @author Kai Sturm
- * @version 1.1
+ * @version 1.2
+ * last Editor: Alexander Ley
  *
  * This class handles functionality of menu.
  */
 public class MenuController implements IController<MenuController>, ILogger {
 
-    @FXML private Button btn_play;
-    @FXML private Button btn_rules;
+    @FXML private Button btn_mute;
 
     @Override
     public MenuController getInstance() {
         return this;
     }
 
+    @Override
+    public Button getMuteButton() {
+        return btn_mute;
+    }
+
+    /**
+     * Opens ShipPlacer.
+     */
     public void onClickPlay() {
         BattleshipClientApp.changeScene("/FXML/shipsPlacer.fxml", "Schiffe platzieren", 800, 550, false);
     }
 
+    /**
+     * Open ules window.
+     */
     public void onClickRules() {
         BattleshipClientApp.changeScene("/FXML/rules.fxml", "Regeln", 800, 600, false);
         ((RulesController) BattleshipClientApp.activeController.getInstance()).nameController(true);

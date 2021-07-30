@@ -24,12 +24,12 @@
                <Font size="20.0" />
             </font>
          </Label>
-         <Button fx:id="btn_menu" mnemonicParsing="false" onAction="#onCLickMenu" prefHeight="40.0" text="Zurück zum Menü">
+         <Button mnemonicParsing="false" onAction="#onCLickMenu" prefHeight="40.0" text="Zurück zum Menü">
             <VBox.margin>
                <Insets top="50.0" />
             </VBox.margin>
          </Button>
-         <Button fx:id="btn_quit" mnemonicParsing="false" onAction="#onCLickQuit" text="Beenden">
+         <Button mnemonicParsing="false" onAction="#onQuit" text="Beenden">
             <VBox.margin>
                <Insets top="30.0" />
             </VBox.margin>
