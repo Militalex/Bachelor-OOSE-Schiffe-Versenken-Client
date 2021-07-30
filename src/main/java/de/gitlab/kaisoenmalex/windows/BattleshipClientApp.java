@@ -35,6 +35,7 @@ public class BattleshipClientApp extends Application implements ILogger {
      * A Reference to activeController Object.
      */
     public static IController<?> activeController;
+    public static SoundConfigController soundController;
     public static Stage stage;
 
     public static @Nullable BattleshipClient client;

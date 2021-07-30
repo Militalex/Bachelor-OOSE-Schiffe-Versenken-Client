@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="100.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.gitlab.kaisoenmalex.windows.SoundConfigController">
+   <HBox alignment="CENTER" layoutY="14.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <Button fx:id="btn_mute" mnemonicParsing="false" onAction="#onMute" prefWidth="25.0">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Slider fx:id="slid_volume" majorTickUnit="0.1" max="1.0" minorTickCount="0" showTickMarks="true">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Slider>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#onBack" text="Zurück">
+               <font>
+                  <Font size="14.0"/>
+               </font>
+            </Button>
+         </HBox>
+      </VBox>
+   </HBox>
+</AnchorPane>
