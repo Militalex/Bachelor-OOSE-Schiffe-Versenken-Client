@@ -1,9 +1,10 @@
-<svg fill="none" width="3000" height="3000" xmlns="http://www.w3.org/2000/svg">
+<svg fill="none" width="900" height="4500" xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml">
+	<head>
         <meta charset="utf-8"></meta>
         <meta name="author" content="Kai Sturm"></meta>
-        <link rel="stylesheet" type="text/css" href="css/style.css"></link>
+        <link rel="stylesheet" type="text/css" href="src/main/resources/rules/css/style.css"></link>
         <title> Regeln - Schiffe Versenken </title>
         <link rel="icon" href="" type="image/x-icon"></link>
 
@@ -11,7 +12,8 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <link rel="preconnect" href="https://fonts.gstatic.com"></link>
-
+		<link href='http://fonts.googleapis.com/css?family=Otomanopee+One:300,400' rel='stylesheet' type='text/css'></link>     
+	</head>
     <body>
         <!-- Header -->
         <div id="header">
@@ -31,10 +33,10 @@
 
                 <br></br>
                 <p>
-                    Schiffe versenken ist ein Spiel, das klassischerweise mit Zettel und Stift gespielt wird.<br></br>
-                    Bei zwei Mitspielern fertigt sich jeder zwei 10x10 Kästchen große Pläne an.<br></br>
-                    Diese stellen einmal das eigene und dann das gegnerische Meer oder Kampfgebiet<br></br>
-                    dar. In das eigene Meer trägt man nun, ohne dass der Mitspieler dies sieht, seine Flotte ein. Dies<br></br>
+                    Schiffe versenken ist ein Spiel, das klassischerweise mit Zettel und Stift gespielt wird.
+                    Bei zwei Mitspielern fertigt sich jeder zwei 10x10 Kästchen große Pläne an.
+                    Diese stellen einmal das eigene und dann das gegnerische Meer oder Kampfgebiet
+                    dar. In das eigene Meer trägt man nun, ohne dass der Mitspieler dies sieht, seine Flotte ein. Dies
                     geschieht, indem man Gebilde von unterschiedlicher Kästchenlänge einzeichnet.
                 </p>
                 <br></br>
@@ -47,21 +49,21 @@
                     <li>
                         Die Schiffe dürfen nicht aneinander stoßen.
                         <br></br>
-                        <img class="image" src="textures/rules1.png" alt="Fehler1"></img>
+                        <img class="image" src="src/main/resources/rules/textures/rules1.png" alt="Fehler1"></img>
                     </li>
                     <li> Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen.
                         <br></br>
-                        <img class="image" src="textures/rules2.png" alt="Fehler2"></img>
+                        <img class="image" src="src/main/resources/rules/textures/rules2.png" alt="Fehler2"></img>
                     </li>
                     <li>
                         Die Schiffe dürfen auch am Rand liegen.
                         <br></br>
-                        <img class="image" src="textures/rules3.png" alt="Fehler3"></img>
+                        <img class="image" src="src/main/resources/rules/textures/rules3.png" alt="Fehler3"></img>
                     </li>
                     <li>
                         Die Schiffe dürfen nicht diagonal aufgestellt werden.
                         <br></br>
-                        <img class="image" src="textures/rules4.png" alt="Fehler4"></img>
+                        <img class="image" src="src/main/resources/rules/textures/rules4.png" alt="Fehler4"></img>
                     </li>
                     <li>
                         Jeder verfügt über insgesamt zehn Schiffe:
@@ -80,18 +82,18 @@
                                     <br></br>
                                     4x U-Boot (2 Kästchen)
                                 </td>
-                                <td> <img src="textures/rules5.png" id="imageShips"></img> </td>
+                                <td> <img src="src/main/resources/rules/textures/rules5.png" id="imageShips"></img> </td>
                             </tr>
                         </table>
                 </ol>
 
                 <br></br>
                 <p>
-                    Der Schießende gibt an, auf welches Feld er feuert. Der Server sieht auf den Plan und antwortet mit Wasser oder Treffer.<br></br>
-                    Ein Schiff gilt als versenkt, wenn alle Felder des Schiffes getroffen wurden.<br></br>
-                    Es wird notiert, welche Felder bereits mit welchem Ergebnis abgeschossen wurden.<br></br>
-                    Der Beschossene sieht ebenfalls, welche Felder der Gegner bereits getroffen hat.<br></br>
-                    Der Spieler am Zug darf so lange schießen bis er ins Wasser getroffen hat. Danach ist der Gegenspieler am Zug.<br></br>
+                    Der Schießende gibt an, auf welches Feld er feuert. Der Server sieht auf den Plan und antwortet mit Wasser oder Treffer
+                    Ein Schiff gilt als versenkt, wenn alle Felder des Schiffes getroffen wurden.
+                    Es wird notiert, welche Felder bereits mit welchem Ergebnis abgeschossen wurden.
+                    Der Beschossene sieht ebenfalls, welche Felder der Gegner bereits getroffen hat.
+                    Der Spieler am Zug darf so lange schießen bis er ins Wasser getroffen hat. Danach ist der Gegenspieler am Zug.
                     Wer zuerst alle Schiffe des Gegners versenkt hat, ist der Sieger.
                 </p>
                 <br></br>
@@ -108,14 +110,14 @@
                     Es gibt zwei Möglichkeiten der Installation:
                 </p>
                 <ol start="0">
-                    <li> Die erforderlichen .jar Dateien vom Client und Server können durch Klonen und<br></br>
+                    <li> Die erforderlichen .jar Dateien vom Client und Server können durch Klonen und
                         anschließender Ausführung der gradle/build/jar task manuell erstellt werden. </li>
                     <li> Die erforderlichen .jar Dateien finden sich auch unter den Projekten als sogenannter Release. </li>
                     <li>
-                        Es gilt zu beachten, dass aktuell bereits von uns ein Schiffe-Versenken Server auf einem Linux Root Server im Internet gehostet wird.<br></br>
+                        Es gilt zu beachten, dass aktuell bereits von uns ein Schiffe-Versenken Server auf einem Linux Root Server im Internet gehostet wird.
                         Dessen Adresse ist im Code verankert und müsste für lokale Server-Client Testzwecke angepasst werden.
                         <br></br>
-                        (SERVER_ADDRESS = "http://localhost:4567/"; HOST_ADDRESS = "localhost";).
+                        (SERVER_ADDRESS = "http://localhost:4567/"; HOST_ADDRESS = "localhost";)
                     </li>
                 </ol>
 
@@ -124,10 +126,10 @@
                 <br></br>
 
                 <p>
-                    Um Schiffe zu platzieren oder umzusetzen klickt man diese mit der linken Maustaste an. Daraufhin<br></br>
-                    folgt das Schiff dem Mauszeiger und kann auf dem Spielfeld mit einem weiteren<br></br>
-                    Linksklick platziert werden. Wenn das Schiff dem Mauszeiger folgt, kann es mit einem Rechtsklick<br></br>
-                    wieder zurück in seine Ausgangsstellung gebracht werden. Ein Schiff kann mit dem Mausrad um 90° gedreht<br></br>
+                    Um Schiffe zu platzieren oder umzusetzen klickt man diese mit der linken Maustaste an. Daraufhin
+                    folgt das Schiff dem Mauszeiger und kann auf dem Spielfeld mit einem weiteren
+                    Linksklick platziert werden. Wenn das Schiff dem Mauszeiger folgt, kann es mit einem Rechtsklick
+                    wieder zurück in seine Ausgangsstellung gebracht werden. Ein Schiff kann mit dem Mausrad um 90° gedreht
                     werden.
                 </p>
 
@@ -140,12 +142,12 @@
                 </p>
                 <ol start="0">
                     <li>
-                        Wenn man ein neues Spiel erstellen und dabei mit einem bestimmten Spieler spielen möchte so wählt man "Neues Spiel" und bestätigt.<br></br>
+                        Wenn man ein neues Spiel erstellen und dabei mit einem bestimmten Spieler spielen möchte so wählt man "Neues Spiel" und bestätigt.
                         Dabei wird ein Code generiert, der an den Mitspieler gesendet werden kann.
                     </li>
                     <li>
-                        Wenn man ein neues Spiel erstellen und dabei mit einem zufälligen Spieler spielen möchte <br></br>
-						so wählt man "Neues Spiel" und setzt bei "zufällig einen Haken" und bestätigt.<br></br>
+                        Wenn man ein neues Spiel erstellen und dabei mit einem zufälligen Spieler spielen möchte
+						so wählt man "Neues Spiel" und setzt bei "zufällig einen Haken" und bestätigt.
                         Dabei wird ein Code generiert, der an den Mitspieler gesendet werden kann.
                     </li>
                     <li>
