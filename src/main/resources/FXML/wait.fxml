@@ -31,7 +31,8 @@
             </VBox.margin>
             <Image url="@../styles/animation/laden.gif" />
          </ImageView>
-         <Button fx:id="btn_quit" mnemonicParsing="false" prefHeight="33.0" prefWidth="89.0" onAction="#onClickQuit" text="Beenden" />
+         <Button fx:id="btn_quit" mnemonicParsing="false" onAction="#onClickQuit" prefHeight="33.0" prefWidth="89.0" text="Beenden" />
       </VBox>
    </HBox>
+   <Button fx:id="btn_mute" mnemonicParsing="false" text="Button" />
 </AnchorPane>
