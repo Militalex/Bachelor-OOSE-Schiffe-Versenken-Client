@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author Alexander Ley
- * @version 1.0
+ * @version 1.0.1
  *
  * This class can fade sounds to any volumes.
  */
@@ -56,12 +56,13 @@ public class FadeSound extends Tickable{
     }
 
     /**
-     * Add step to volume until end is reached.
+     * Add step to volume until end is reached (Player will be automatically closed if end is 0).
      */
     @Override
     public void tick() {
         if ((step < 0 && volume <= end) || (step > 0 && volume >= end)){
             player.setVolume(end);
+            if (NumberUtil.equals(end, 0)) player.stop();
             forceStop();
             return;
         }
