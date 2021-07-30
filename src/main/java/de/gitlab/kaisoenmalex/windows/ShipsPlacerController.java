@@ -126,8 +126,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
                 gridPane.add(pane, x, y);
             }
         }
-
-        AREA.placeShip(0, 0, 5, true);
+        /*AREA.placeShip(0, 0, 5, true);
         AREA.placeShip(2, 0, 4, true);
         AREA.placeShip(4, 0, 4, true);
         AREA.placeShip(6, 0, 3, true);
@@ -137,7 +136,7 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
         AREA.placeShip(4, 8, 2, true);
         AREA.placeShip(6, 8, 2, true);
 
-        paneDadMap.keySet().forEach(pane -> pane.setVisible(false));
+        paneDadMap.keySet().forEach(pane -> pane.setVisible(false));*/
 
         renderArea();
     }
