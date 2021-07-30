@@ -19,7 +19,7 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * @author Alexander Ley
- * @version 1.3.3
+ * @version 1.3.4
  *
  * This class defines all client reactions.
  * Note every Method have (ObjectOutputStream writer, Object... parameters) Parameters.
@@ -81,7 +81,6 @@ public class ActionHandler implements ILogger{
      * Stops game and defines a winner.
      */
     private static void stopGame(ObjectOutputStream writer, boolean hasWon, boolean hasGivenUp){
-        System.out.println("Stop");
         final BattleshipClient client = BattleshipClientApp.client;
         assert client != null;
 
@@ -97,8 +96,6 @@ public class ActionHandler implements ILogger{
      * Abort game e.g. if enemy has left game. Winner is not defined.
      */
     private static void abortGame(ObjectOutputStream writer, String msg){
-        System.out.println("Abort");
-
         CountDownLatch latch = new CountDownLatch(1);
 
         Platform.runLater(() -> {
@@ -121,7 +118,6 @@ public class ActionHandler implements ILogger{
      * Answers Server alive packet to tell server "Hey i'm still here!".
      */
     private static void isAlive(ObjectOutputStream writer) {
-        System.out.println("Alive");
         final ActionPacket packet = new ActionPacket("refreshClient");
         TCPUtil.sendObject(writer, packet);
     }
