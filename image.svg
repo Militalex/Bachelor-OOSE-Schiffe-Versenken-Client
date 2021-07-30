@@ -1,0 +1,265 @@
+<svg fill="none" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+        <meta charset="utf-8"></meta>
+        <meta name="author" content="Kai Sturm"></meta>
+        <link rel="stylesheet" type="text/css" href="css/style.css"></link>
+        <title> Regeln - Schiffe Versenken </title>
+        <link rel="icon" href="" type="image/x-icon"></link>
+
+        <!-- Fonts -->
+
+        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+        <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+
+    <body>
+        <!-- Header -->
+        <div id="header">
+            <div id="navibar">
+                <div class="center">
+                    <h1> Schiffe Versenken </h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div id="background">
+            <div id="menu">
+                <div class="center">
+                    <h2> Spielregeln </h2>
+                </div>
+
+                <br></br>
+                <p>
+                    Schiffe versenken ist ein Spiel, das klassischerweise mit Zettel und Stift gespielt wird.
+                    Bei zwei Mitspielern fertigt sich jeder zwei 10x10 Kästchen große Pläne an.
+                    Diese stellen einmal das eigene und dann das gegnerische Meer oder Kampfgebiet
+                    dar. In das eigene Meer trägt man nun, ohne dass der Mitspieler dies sieht, seine Flotte ein. Dies
+                    geschieht, indem man Gebilde von unterschiedlicher Kästchenlänge einzeichnet.
+                </p>
+                <br></br>
+
+                <p>
+                    Folgende Regeln müssen beim Platzieren eingehalten werden:
+                </p>
+
+                <ol start="0">
+                    <li>
+                        Die Schiffe dürfen nicht aneinander stoßen.
+                        <br></br>
+                        <img class="image" src="textures/rules1.png" alt="Fehler1"></img>
+                    </li>
+                    <li> Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen.
+                        <br></br>
+                        <img class="image" src="textures/rules2.png" alt="Fehler2"></img>
+                    </li>
+                    <li>
+                        Die Schiffe dürfen auch am Rand liegen.
+                        <br></br>
+                        <img class="image" src="textures/rules3.png" alt="Fehler3"></img>
+                    </li>
+                    <li>
+                        Die Schiffe dürfen nicht diagonal aufgestellt werden.
+                        <br></br>
+                        <img class="image" src="textures/rules4.png" alt="Fehler4"></img>
+                    </li>
+                    <li>
+                        Jeder verfügt über insgesamt zehn Schiffe:
+                    </li>
+                        <table>
+                            <tr>
+                                <td>
+                                    1x Schlachtschiff (5 Kästchen)
+                                    <br></br>
+                                    <br></br>
+                                    2x Kreuzer (4 Kästchen)
+                                    <br></br>
+                                    <br></br>
+                                    3x Zerstörer (3 Kästchen)
+                                    <br></br>
+                                    <br></br>
+                                    4x U-Boot (2 Kästchen)
+                                </td>
+                                <td> <img src="textures/rules5.png" id="imageShips"></img> </td>
+                            </tr>
+                        </table>
+                </ol>
+
+                <br></br>
+                <p>
+                    Der Schießende gibt an, auf welches Feld er feuert. Der Server sieht auf den Plan und antwortet mit Wasser oder Treffer.
+                    Ein Schiff gilt als versenkt, wenn alle Felder des Schiffes getroffen wurden.
+                    Es wird notiert, welche Felder bereits mit welchem Ergebnis abgeschossen wurden.
+                    Der Beschossene sieht ebenfalls, welche Felder der Gegner bereits getroffen hat.
+                    Der Spieler am Zug darf so lange schießen bis er ins Wasser getroffen hat. Danach ist der Gegenspieler am Zug.
+                    Wer zuerst alle Schiffe des Gegners versenkt hat, ist der Sieger.
+                </p>
+                <br></br>
+
+                <div class="center">
+                    <h2> Bedienung der App </h2>
+                </div>
+
+                <br></br>
+                <u> <h3> 0. Installation: </h3> </u>
+                <br></br>
+
+                <p>
+                    Es gibt zwei Möglichkeiten der Installation:
+                </p>
+                <ol start="0">
+                    <li> Die erforderlichen .jar Dateien vom Client und Server können durch Klonen und
+                        anschließender Ausführung der gradle/build/jar task manuell erstellt werden. </li>
+                    <li> Die erforderlichen .jar Dateien finden sich auch unter den Projekten als sogenannter Release. </li>
+                    <li>
+                        Es gilt zu beachten, dass aktuell bereits von uns ein Schiffe-Versenken Server auf einem Linux Root Server im Internet gehostet wird.
+                        Dessen Adresse ist im Code verankert und müsste für lokale Server-Client Testzwecke angepasst werden.
+                        <br></br>
+                        (SERVER_ADDRESS = "http://localhost:4567/"; HOST_ADDRESS = "localhost";).
+                    </li>
+                </ol>
+
+                <br></br>
+                <u> <h3> 1. Schiffe platzieren: </h3> </u>
+                <br></br>
+
+                <p>
+                    Um Schiffe zu platzieren oder umzusetzen klickt man diese mit der linken Maustaste an. Daraufhin
+                    folgt das Schiff dem Mauszeiger und kann auf dem Spielfeld mit einem weiteren
+                    Linksklick platziert werden. Wenn das Schiff dem Mauszeiger folgt, kann es mit einem Rechtsklick
+                    wieder zurück in seine Ausgangsstellung gebracht werden. Ein Schiff kann mit dem Mausrad um 90° gedreht
+                    werden.
+                </p>
+
+                <br></br>
+                <u> <h3> 2. Einloggen: </h3> </u>
+                <br></br>
+
+                <p>
+                    Zum Einloggen muss der Spieler zunächst seinen Namen eingeben. Danach gibt es drei Möglichkeiten fortzufahren:
+                </p>
+                <ol start="0">
+                    <li>
+                        Wenn man ein neues Spiel erstellen und dabei mit einem bestimmten Spieler spielen möchte so wählt man "Neues Spiel" und bestätigt.
+                        Dabei wird ein Code generiert, der an den Mitspieler gesendet werden kann.
+                    </li>
+                    <li>
+                        Wenn man ein neues Spiel erstellen und dabei mit einem zufälligen Spieler spielen möchte so wählt man "Neues Spiel" und setzt bei "zufällig einen Haken" und bestätigt.
+                        Dabei wird ein Code generiert, der an den Mitspieler gesendet werden kann.
+                    </li>
+                    <li>
+                        Wenn man mit einem Code einem Spiel beitreten möchte, so wählt man "Spiel betreten" und gibt diesen in dem erscheinenden Textfeld ein und bestätigt.
+                    </li>
+                    <li>
+                        Der Host Spieler kann angeben, ob das Spiel in der Pro oder Noob Version gespielt wird. In der Pro Version werden die Schiffsenden nicht als solche dargestellt.
+                    </li>
+                </ol>
+
+                <br></br>
+                <u> <h3> 3. Spielen: </h3> </u>
+                <br></br>
+
+                <p>
+                    Der Spieler am Zug hat die Möglichkeit, durchs Linksklicken auf das obere gegnerische Feld, dieses abzuschießen.
+                </p>
+
+                <br></br>
+                <div class="center">
+                    <h2> Credits </h2>
+                </div>
+
+                <br></br>
+                <u> <h3> Aufgabenteilung: </h3> </u>
+
+                <br></br>
+                <ul>
+                    <li class="cursive"> Alexander Ley </li>
+                    <ul>
+                        <li> Backend: </li>
+                            <ul>
+                                <li> (Vollst.) Server-Kommunikation </li>
+                                <li> (Vollst.) API </li>
+                            </ul>
+                        <li> Frontend: </li>
+                        <ul>
+                            <li> BattleshipClientApp </li>
+                            <li> ShipsPlacerController </li>
+                            <li> GameController </li>
+                        </ul>
+                    </ul>
+
+                    <li class="cursive"> Sidar Serhat Sönmez </li>
+                        <ul>
+                            <li> Frontend: </li>
+                            <ul>
+                                <li> LoginController </li>
+                                <li> WaitController </li>
+                                <li> EndController </li>
+                                <li> weitere Methoden </li>
+                                <li> mitgewirkt im GameController </li>
+                            </ul>
+                        </ul>
+
+                    <li class="cursive"> Kai Sturm </li>
+                    <ul>
+                        <li> Backend: </li>
+                        <ul>
+                            <li> GameController </li>
+                            <li> ShipsPlacerController </li>
+                        </ul>
+                        <li> Frontend: </li>
+                        <ul>
+                            <li> MenuController </li>
+                            <li> RulesController </li>
+                            <li> ShipsPlacerController </li>
+                            <li> GameController </li>
+                            <li> HTML/CSS </li>
+                        </ul>
+                    </ul>
+                </ul>
+
+                <br></br>
+                <u> <h3> Media: </h3> </u>
+                <br></br>
+                <ul>
+                    <li class="cursive"> Lobby-Music </li>
+                        <ul>
+                            <li> Lobby Time by Kevin MacLeod </li>
+                            <li> <a href="https://incompetech.filmmusic.io/song/3986-lobby-time" target="_blank"> Zum Song </a> </li>
+                            <li> <a href="https://incompetech.filmmusic.io/standard-license" target="_blank"> Lizenz </a> </li>
+                            <li> Es wurden keinerlei Veränderungen an dem Werk vorgenommen. </li>
+                        </ul>
+                    <li class="cursive"> Hitman-Music </li>
+                    <ul>
+                        <li> Hitman by Kevin MacLeod </li>
+                        <li> <a href="https://filmmusic.io/song/3880-hitman" target="_blank"> Zum Song </a> </li>
+                        <li> <a href="https://incompetech.filmmusic.io/standard-license" target="_blank"> Lizenz </a> </li>
+                        <li> Es wurden keinerlei Veränderungen an dem Werk vorgenommen. </li>
+                    </ul>
+                    <li class="cursive"> Lade-Animation </li>
+                    <ul>
+                        <li> Gusano loader by Vitaly Silkin </li>
+                        <li> <a href="https://dribbble.com/shots/2984114-Gusano-loader" target="_blank"> Zur Animation </a> </li>
+                        <li> Es wurden keinerlei Veränderungen an dem Werk vorgenommen. </li>
+                    </ul>
+                    <li class="cursive"> Schiff-Texturen </li>
+                    <ul>
+                        <li> Saarcraft iOser100 Edition </li>
+                        <li> <a href="https://www.curseforge.com/minecraft/texture-packs/ioser-100-faithfull-edit/files" target="_blank"> Zum "Ressource-Pack" </a> </li>
+                        <li> Es wurden Texturen aus dem Packet bearbeitet und verwendet. </li>
+                    </ul>
+                </ul>
+                <br></br>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer">
+            <a> Alexander Ley </a> |
+            <a> Sidar Serhat Sönmez </a> |
+            <a> Kai Sturm </a>
+        </div>
+    </body>
+    </div>
+  </foreignObject>
+</svg>
