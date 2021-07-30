@@ -18,7 +18,7 @@ import java.util.zip.ZipInputStream;
 
 /**
  * @author Alexander Ley
- * @version 1.4.1
+ * @version 1.5
  * latest author: Alexander Ley
  *
  * This Class is the entry Point into the Application.
@@ -45,6 +45,8 @@ public class BattleshipClientApp extends Application implements ILogger {
      */
     @Override
     public void start(Stage stage){
+        stage.setResizable(false);
+
         BattleshipClientApp.stage = stage;
         application = this;
 
@@ -52,7 +54,7 @@ public class BattleshipClientApp extends Application implements ILogger {
 
         changeScene("/FXML/menu.fxml", "Schiffe Versenken", 600, 400, false);
 
-        FxUtils.playMusic("/sounds/lobby.mp3");
+        SoundUtil.fadeInSound("/sounds/lobby.mp3", 15);
 
         stage.show();
 
@@ -61,6 +63,8 @@ public class BattleshipClientApp extends Application implements ILogger {
 
     @Override
     public void stop() {
+        FadeSound.clearFades();
+
         if (client != null && !(activeController instanceof GameController)){
             client.close();
         }
