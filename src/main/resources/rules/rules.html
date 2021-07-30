@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 
-<html>
-
+<html lang="de">
     <head>
-
         <meta charset="utf-8">
         <meta name="author" content="Kai Sturm">
         <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -14,41 +12,39 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap" rel="stylesheet">  
-
+        <link href="https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap" rel="stylesheet">
     </head>
 
     <body>
-
         <!-- Header -->
-
         <div id="header">
-
             <div id="navibar">
-
-                <center>
-                <h1> Schiffe Versenken </h1>
-                </center>
-
-            </div>              
-            
+                <div class="center">
+                    <h1> Schiffe Versenken </h1>
+                </div>
+            </div>
         </div>
 
         <!-- Body -->
-
         <div id="background">
-
             <div id="menu">
-
                 <div class="center">
-                <h2> Regeln </h2>
+                    <h2> Spielregeln </h2>
                 </div>
 
                 <br>
-
-                <p> Zu Beginn des Spiels müssen die Schiffe nach folgenden Regeln gesetzt werden: </p>
-
+                <p>
+                    Schiffe versenken ist ein Spiel, das klassischerweise mit Zettel und Stift gespielt wird.
+                    Bei zwei Mitspielern fertigt sich jeder zwei 10x10 Kästchen große Pläne an.
+                    Diese stellen einmal das eigene und dann das gegnerische Meer oder Kampfgebiet
+                    dar. In das eigene Meer trägt man nun, ohne dass der Mitspieler dies sieht, seine Flotte ein. Dies
+                    geschieht, indem man Gebilde von unterschiedlicher Kästchenlänge einzeichnet.
+                </p>
                 <br>
+
+                <p>
+                    Folgende Regeln müssen beim Platzieren eingehalten werden:
+                </p>
 
                 <ol>
                     <li> Die Schiffe dürfen nicht aneinander stoßen. </li>
@@ -56,16 +52,22 @@
                     <li> Die Schiffe dürfen auch am Rand liegen. </li>
                     <li> Die Schiffe dürfen nicht diagonal aufgestellt werden. </li>
                     <li> Jeder verfügt über insgesamt zehn Schiffe: </li>
-
                         <ul>
                             <li> 1x Schlachtschiff (5 Kästchen) </li>
                             <li> 2x Kreuzer (4 Kästchen) </li>
                             <li> 3x Zerstörer (3 Kästchen) </li>
                             <li> 4x U-Boot (2 Kästchen) </li>
                         </ul>
-
                 </ol>
 
+                <br>
+                Der Schießende gibt an, auf welches Feld er feuert. Der Server sieht auf den Plan und antwortet mit Wasser oder Treffer.
+                Ein Schiff gilt als versenkt, wenn alle Felder des Schiffes getroffen wurden.
+                Es wird notiert, welche Felder bereits mit welchem Ergebnis abgeschossen wurden.
+                Der Beschossene sieht ebenfalls, welche Felder der Gegner bereits getroffen hat.
+                Der Spieler am Zug darf so lange schießen bis er ins Wasser getroffen hat. Danach ist der Gegenspieler am Zug.
+                Wer zuerst alle Schiffe des Gegners versenkt hat, ist der Sieger.
+                <br>
                 <br>
 
                 <div class="center">
@@ -73,32 +75,27 @@
                 </div>
 
                 <br>
-
                 <u> <h3> 1. Schiffe platzieren: </h3> </u>
 
                 <br>
-
-                <p> Um Schiffe zu platzieren oder umzusetzen klickt man diese mit der linken Maustaste an, daraufhin
-                    folgt dass Schiff dem Mauszeiger und kann auf dem Spielfeld mit einem weiteren
+                <p>
+                    Um Schiffe zu platzieren oder umzusetzen klickt man diese mit der linken Maustaste an, daraufhin
+                    folgt das Schiff dem Mauszeiger und kann auf dem Spielfeld mit einem weiteren
                     (links-)Klick platziert werden. Wenn das Schiff dem Mauszeiger folgt, kann es mit einem Rechtsklick
                     wieder zurück in seine Ausgangsstellung gebracht werden. Ein Schiff kann mit dem Mausrad um 90° gedreht
                     werden.
                 </p>
 
                 <br>
-
                 <div class="center">
                     <h2> Credits </h2>
                 </div>
 
                 <br>
-
                 <u> <h3> Aufgabenteilung: </h3> </u>
 
                 <br>
-
                 <ul>
-
                     <li class="cursive"> Alexander Ley </li>
                     <ul>
                         <li> Backend </li>
@@ -145,7 +142,6 @@
                 </ul>
 
                 <br>
-
                 <u> <h3> Media: </h3> </u>
 
                 <ul>
@@ -153,21 +149,14 @@
                     <li class="cursive"> Hitman-Music </li>
 
                 </ul>
-
             </div>
-
         </div>
 
         <!-- Footer -->
-
         <div id="footer">
-
             <a> Alexander Ley | </a>
             <a> Sidar Serhat Sönmez | </a>
             <a> Kai Sturm </a>
-
         </div>
-
     </body>
-
 </html>
