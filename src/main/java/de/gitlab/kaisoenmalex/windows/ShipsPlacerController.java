@@ -218,7 +218,8 @@ public class ShipsPlacerController implements IController<ShipsPlacerController>
      * Shows "rules" window.
      */
     public void onClickRules() {
-        BattleshipClientApp.changeScene("/FXML/rules.fxml", "Regeln", 600, 400, false);
+        BattleshipClientApp.changeScene("/FXML/rules.fxml", "Regeln", 800, 600, false);
+        ((RulesController) BattleshipClientApp.activeController.getInstance()).nameController(false);
     }
 
     /**
