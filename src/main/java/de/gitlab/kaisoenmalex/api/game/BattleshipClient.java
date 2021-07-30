@@ -3,6 +3,7 @@ package de.gitlab.kaisoenmalex.api.game;
 import de.gitlab.kaisoenmalex.api.network.ClientNetwork;
 import de.gitlab.kaisoenmalex.api.network.packets.ActionPacket;
 import de.gitlab.kaisoenmalex.api.network.packets.ConnectPacket;
+import de.gitlab.kaisoenmalex.api.util.SoundUtil;
 import de.gitlab.kaisoenmalex.windows.BattleshipClientApp;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,7 +13,7 @@ import java.util.Collections;
 
 /**
  * @author Alexander Ley
- * @version 1.0.1
+ * @version 1.0.2
  *
  * This class handles all client functionalities.
  */
@@ -23,7 +24,7 @@ public class BattleshipClient implements Closeable {
     private Boolean isNoob;
 
     private ClientNetwork network;
-    //TODO: Hold Controller reference
+
     private GameArea ownArea, enemyArea;
     private boolean canAttack = false;
 
@@ -106,5 +107,6 @@ public class BattleshipClient implements Closeable {
     public void close() {
         network.close();
         BattleshipClientApp.client = null;
+        SoundUtil.playLobby();
     }
 }
