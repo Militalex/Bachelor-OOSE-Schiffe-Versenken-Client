@@ -32,6 +32,19 @@
     color: red;
 }
 
+a {
+    color: black;
+}
+
+a:hover {
+    color: blue;
+}
+
+.image {
+    padding: 1%;
+    align-content: center;
+}
+
 #footer {
     background-color: lightgrey;
     padding-left: 1%;
