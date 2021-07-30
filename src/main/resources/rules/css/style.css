@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    font-family: Otomanopee One, sans-serif;
+}
+
+#header {
+    background-color: lightgrey;
+    padding-left: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.center {
+    text-align: center;
+}
+
+#background {
+    background-color: #BAFFFC;
+}
+
+#menu {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 1%;
+}
+
+#menu p {    
+    width: 100%;
+}
+
+.cursive {
+    color: red;
+}
+
+#footer {
+    background-color: lightgrey;
+    padding-left: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-align: center;
+}
