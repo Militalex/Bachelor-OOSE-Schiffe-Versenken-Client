@@ -1,4 +1,4 @@
-# Schiffe Versenken
+# Schiffe Versenken Client
 
 Alle Informationen zum Projekt finden sich in der Dokumentation in der README.html:  
 ![Zur Dokumentation](https://uni-bonn.sciebo.de/s/VPM81aD1v8ttvU8/download)  
