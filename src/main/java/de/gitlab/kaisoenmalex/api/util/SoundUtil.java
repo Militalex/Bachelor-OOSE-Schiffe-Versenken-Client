@@ -6,10 +6,10 @@ import javafx.scene.media.MediaPlayer;
 import java.util.Objects;
 
 /**
+ * This class holds information about application sound system and offers methods to control them.
+ *
  * @author Alexander Ley
  * @version 1.0
- *
- * This class holds information about application sound system and offers methods to control them.
  */
 public class SoundUtil {
 

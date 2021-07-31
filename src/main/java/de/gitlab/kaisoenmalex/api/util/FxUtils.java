@@ -15,10 +15,10 @@ import java.awt.*;
 import java.util.function.Consumer;
 
 /**
+ * This class offers help methods for JavaFx things.
+ *
  * @author Alexander Ley
  * @version 1.5
- *
- * This class offers help methods for JavaFx things.
  */
 public class FxUtils implements ILogger{
 

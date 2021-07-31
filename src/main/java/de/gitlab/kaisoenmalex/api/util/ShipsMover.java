@@ -6,11 +6,11 @@ import javafx.scene.layout.Pane;
 import java.awt.*;
 
 /**
+ * This class can moves ship around by binding them to mouse cursor.
+ *
  * @author Kai Sturm
  * @version 1.2
  * last author: Kai Sturm & Alexander Ley
- *
- * This class can moves ship around by binding them to mouse cursor.
  */
 public class ShipsMover extends Tickable {
 

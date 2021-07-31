@@ -13,11 +13,11 @@ import java.io.Closeable;
 import java.io.IOException;
 
 /**
+ * This class handles functionality of the wait window.
+ *
  * @author Sidar Sönmez
  * @version 1.3
  * last Author: Alexander Ley
- *
- * This class handles functionality of the wait window.
  */
 
 public class WaitController implements IController<WaitController>, Closeable, ILogger {

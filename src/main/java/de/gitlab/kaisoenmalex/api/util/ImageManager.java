@@ -11,11 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * This class can manage an amount (Menge) of images and their rotations.
+ * All images were merged together (with individual rotation) to create one image.
+ *
  * @author Alexander Ley
  * @version 1.2
- *
- * This class can manage an amount (Menge) of images and there rotations.
- * All images were merged together (with individual rotation) to create one image.
  */
 public class ImageManager implements Serializable {
 

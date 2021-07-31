@@ -18,11 +18,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
+ * This class handles functionality of the login window.
+ *
  * @author Sidar Sönmez
  * @version 1.4
  * last Author: Alexander Ley
- *
- * This class handles functionality of the login window.
  */
 public class LoginController implements IController<LoginController>, ILogger {
 

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class can fade sounds to any volumes.
+ *
  * @author Alexander Ley
  * @version 1.0.1
- *
- * This class can fade sounds to any volumes.
  */
 public class FadeSound extends Tickable{
 

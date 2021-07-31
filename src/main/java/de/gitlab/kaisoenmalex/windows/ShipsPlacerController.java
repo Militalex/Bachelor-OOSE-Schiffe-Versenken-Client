@@ -18,11 +18,11 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
+ * This class handles functionality of ships placer window.
+ *
  * @author Kai Sturm
  * @version 1.3.3
  * latest author: Alexander Ley
- *
- * This class handles functionality of ships placer window.
  */
 public class ShipsPlacerController implements IController<ShipsPlacerController>, ILogger, Closeable {
 

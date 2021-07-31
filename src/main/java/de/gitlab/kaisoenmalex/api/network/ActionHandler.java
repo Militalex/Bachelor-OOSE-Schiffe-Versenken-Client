@@ -18,11 +18,11 @@ import java.io.ObjectOutputStream;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * @author Alexander Ley
- * @version 1.3.4
- *
  * This class defines all client reactions.
  * Note every Method have (ObjectOutputStream writer, Object... parameters) Parameters.
+ *
+ * @author Alexander Ley
+ * @version 1.3.4
  */
 public class ActionHandler implements ILogger{
 

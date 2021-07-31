@@ -12,10 +12,10 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
+ * This class shows rules page.
+ *
  * @author Kai Sturm
  * @version 1.0
- *
- * This class shows rules page.
  */
 public class RulesController implements IController<RulesController> {
 

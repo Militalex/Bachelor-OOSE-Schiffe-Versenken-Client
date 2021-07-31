@@ -10,10 +10,10 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
+ * This Interface wraps all Controller into one Reference Type and Returns the actual object.
+ *
  * @author Alexander Ley
  * @version 2.0
- *
- * This Interface wraps all Controller into one Reference Type and Returns the actual object.
  */
 public interface IController<T> extends Initializable {
 
@@ -25,7 +25,7 @@ public interface IController<T> extends Initializable {
     @Nullable Button getMuteButton();
 
     /**
-     * Deefines standard configs of mute button.
+     * Defines standard configs of mute button.
      */
     @Override
     default void initialize(URL location, ResourceBundle resources) {

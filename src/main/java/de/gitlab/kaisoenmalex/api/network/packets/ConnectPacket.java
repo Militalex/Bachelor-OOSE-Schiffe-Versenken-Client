@@ -5,10 +5,10 @@ import de.gitlab.kaisoenmalex.api.game.GameArea;
 import java.io.Serializable;
 
 /**
+ * This class stores data which is sent to server by client to connect the first time.
+ *
  * @author Alexander Ley
  * @version 1.0
- *
- * This class stores data which is send to server by client to connect the first time.
  */
 public class ConnectPacket implements Serializable {
     private final String name;

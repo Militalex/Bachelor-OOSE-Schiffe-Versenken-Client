@@ -12,11 +12,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * author Sidar Sönmez
+ * This window is shown if one player has given up, won or lost.
+ *
+ * @author Sidar Sönmez
  * @version 1.2
  * latest author: Alexander Ley
- *
- * This window is shown if one player has given up, won or lost.
  */
 
 public class EndController implements IController<EndController>, ILogger {

@@ -6,11 +6,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 /**
+ * This class handles functionality of menu.
+ *
  * @author Kai Sturm
  * @version 1.2
  * last Editor: Alexander Ley
- *
- * This class handles functionality of menu.
  */
 public class MenuController implements IController<MenuController>, ILogger {
 

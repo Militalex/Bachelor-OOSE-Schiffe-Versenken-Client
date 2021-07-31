@@ -17,11 +17,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
+ * This Class is the entry Point into the Application.
+ *
  * @author Alexander Ley
  * @version 1.5
  * latest author: Alexander Ley
- *
- * This Class is the entry Point into the Application.
  */
 public class BattleshipClientApp extends Application implements ILogger {
 

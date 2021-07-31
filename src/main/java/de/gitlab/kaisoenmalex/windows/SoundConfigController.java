@@ -14,10 +14,10 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
+ * This class handles functionality to change volume settings.
+ *
  * @author Alexander Ley
  * @version 1.0
- *
- * This class handles functionality to change volume settings.
  */
 public class SoundConfigController implements IController<SoundConfigController>, Closeable {
 

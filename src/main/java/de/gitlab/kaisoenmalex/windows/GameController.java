@@ -21,11 +21,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
+ * This class handles functionality of game window.
+ *
  * @author Kai Sturm
  * @version 1.4
  * last Editor: Alexander Ley
- *
- * This class handles functionality of game window.
  */
 public class GameController implements IController<GameController>, Closeable {
 
@@ -108,13 +108,12 @@ public class GameController implements IController<GameController>, Closeable {
             if (whoCanAttack) {
                 lbl_actualPlayer.setStyle("-fx-text-fill: red");
                 SoundUtil.playHitman();
-                if (NumberUtil.equals(SoundUtil.baseVolume, 0)) SoundUtil.player.setVolume(0);
             }
             else {
                 lbl_actualPlayer.setStyle("-fx-text-fill: black");
                 SoundUtil.playLobby();
-                if (NumberUtil.equals(SoundUtil.baseVolume, 0)) SoundUtil.player.setVolume(0);
             }
+            if (NumberUtil.equals(SoundUtil.baseVolume, 0)) SoundUtil.player.setVolume(0);
 
             lbl_actualPlayer.setText(attacker);
 

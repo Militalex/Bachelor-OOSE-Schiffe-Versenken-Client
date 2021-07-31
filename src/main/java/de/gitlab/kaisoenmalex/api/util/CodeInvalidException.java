@@ -3,10 +3,10 @@ package de.gitlab.kaisoenmalex.api.util;
 import java.io.IOException;
 
 /**
+ * This Exception is thrown if code send to server is invalid.
+ *
  * @author Alexander Ley
  * @version 1.0
- *
- * This Exception is thrown if code send to server is invalid.
  */
 public class CodeInvalidException extends IOException {
     public CodeInvalidException() {

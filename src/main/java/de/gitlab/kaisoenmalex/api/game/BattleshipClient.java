@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.util.Collections;
 
 /**
+ * This class handles all client functionalities.
+ *
  * @author Alexander Ley
  * @version 1.0.2
- *
- * This class handles all client functionalities.
  */
 public class BattleshipClient implements Closeable {
 
