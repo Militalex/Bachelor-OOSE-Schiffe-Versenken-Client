@@ -1,5 +1,6 @@
 .idea
 .gradle
+client-master.zip
 **/build/
 !src/**/build/
 
