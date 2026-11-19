@@ -1,16 +1,15 @@
+import de.gitlab.kaisoenmalex.api.game.GameArea;
+import de.gitlab.kaisoenmalex.api.network.ActionHandler;
 import de.gitlab.kaisoenmalex.api.util.ILogger;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import org.jetbrains.annotations.NotNull;
+import de.gitlab.kaisoenmalex.windows.BattleshipClientApp;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.InetAddress;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.Socket;
-import java.util.*;
-import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestMain implements ILogger {
     public static void main(String[] args) throws IOException {
@@ -46,7 +45,19 @@ public class TestMain implements ILogger {
         thread3.start();
         thread4.start();*/
 
-        new TestMain().getLogger().error("Hallo");
-        new TestMain().showError("Hallo");
+        ILogger.showError("Der Gegner hat das Spiel verlassen!");
+
+    }
+
+    public static class Message implements Serializable {
+        private final String text;
+
+        public Message(String text) {
+            this.text = text;
+        }
+
+        public String getText() {
+            return text;
+        }
     }
 }
